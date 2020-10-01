@@ -5,11 +5,18 @@ import UnauthenticatedRoute from "./UnauthenticatedRoute";
 import Home from "../containers/Home";
 import NotFound from "../containers/NotFound";
 import Login from "../containers/Login";
+import Course from "../containers/Course";
 
 const Routes = ({ appProps }) => {
   return (
     <Switch>
       <AuthenticatedRoute path="/" exact component={Home} appProps={appProps} />
+      <AuthenticatedRoute
+        path="/course/:id"
+        exact
+        component={Course}
+        appProps={appProps}
+      />
       <UnauthenticatedRoute
         path="/login"
         exact
