@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Config from "../config";
-import { Jumbotron, Container } from "react-bootstrap";
+import { Jumbotron, Container, Button } from "react-bootstrap";
 
 const Course = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -28,6 +28,19 @@ const Course = (props) => {
         <Jumbotron>
           <h2>{course.name}</h2>
           <p>{course.description}</p>
+          <Button
+            onClick={() => {
+              let cart = props.cart;
+              let item = {
+                id: course.id,
+                course_name: course.name,
+                picture_url: course.picture_url,
+              };
+              props.setCart(cart.concat(item));
+            }}
+          >
+            Add to cart
+          </Button>
         </Jumbotron>
       )}
     </Container>

@@ -5,7 +5,8 @@ import Config from "./config";
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setAuthenticating] = useState(true);
-  const appProps = { isAuthenticated, userHasAuthenticated };
+  const [cart, setCart] = useState([]);
+  const appProps = { isAuthenticated, userHasAuthenticated, cart, setCart };
 
   useEffect(() => {
     fetch(Config.serverUrl + "/checktoken", {
