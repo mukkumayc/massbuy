@@ -23,6 +23,12 @@ const Routes = ({ appProps }) => {
         component={Login}
         appProps={appProps}
       />
+      <AuthenticatedRoute
+        path="/:page"
+        exact
+        component={Home}
+        appProps={appProps}
+      />
       <Route component={NotFound} />
     </Switch>
   );
