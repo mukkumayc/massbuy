@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Config from "../config";
+import { Jumbotron, Container } from "react-bootstrap";
 
 const Course = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -22,14 +23,14 @@ const Course = (props) => {
   }, []);
 
   return (
-    <div className="course container">
+    <Container className="course">
       {!isLoading && (
-        <>
+        <Jumbotron>
           <h2>{course.name}</h2>
           <p>{course.description}</p>
-        </>
+        </Jumbotron>
       )}
-    </div>
+    </Container>
   );
 };
 

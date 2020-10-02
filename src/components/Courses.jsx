@@ -1,16 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Container, Card, Row } from "react-bootstrap";
 
 const Courses = (props) => {
   return (
-    <div className="courses" style={{ display: "flex", width: "300px" }}>
-      {props?.courses.map((val, ind) => (
-        <Link key={ind} to={"/course/" + val.id}>
-          <header>{val.name}</header>
-          <img src={val.picture_url} alt="noimage" width="100px" />
-        </Link>
-      ))}
-    </div>
+    <Container className="courses" fluid>
+      <Row className="justify-content-center">
+        {props?.courses.map((val, ind) => (
+          <Card border="primary" style={{ margin: "0.2rem" }}>
+            <Link key={ind} to={"/course/" + val.id}>
+              <Card.Body>
+                <Card.Title>{val.name}</Card.Title>
+              </Card.Body>
+              <Card.Img variant="bottom" src={val.picture_url} alt="noimage" />
+            </Link>
+          </Card>
+        ))}
+      </Row>
+    </Container>
   );
 };
 

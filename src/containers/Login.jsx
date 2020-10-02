@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import Config from "../config";
+import Container from "react-bootstrap/Container";
 
 class Login extends Component {
   state = {
@@ -10,7 +11,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="login container">
+      <Container className="login">
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={Yup.object().shape({
@@ -58,7 +59,7 @@ class Login extends Component {
             </Form>
           )}
         </Formik>
-      </div>
+      </Container>
     );
   }
 

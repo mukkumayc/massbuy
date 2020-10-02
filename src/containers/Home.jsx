@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Courses from "../components/Courses";
 import Config from "../config";
+import Container from "react-bootstrap/Container";
 
 const Home = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -21,9 +22,9 @@ const Home = (props) => {
   }, []);
 
   return (
-    <div className="home container">
+    <Container className="home" fluid>
       {!isLoading && <Courses courses={courses} />}
-    </div>
+    </Container>
   );
 };
 
