@@ -44,12 +44,15 @@ const Course = (props) => {
                 setSubmitting(false);
                 return;
               }
-              let platform = values.platform.split(":")[0].trim();
+              const [platform, price] = values.platform.split(":");
               let item = {
                 id: course.id,
                 course_name: course.name,
                 picture_url: course.picture_url,
-                platform: platform,
+                platforms: course.platforms,
+                platform: platform.trim(),
+                price: price.trim(),
+                count: 1,
               };
               props.setCart(new Map(props.cart).set(course.id, item));
               setShow(true);

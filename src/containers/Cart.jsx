@@ -1,16 +1,23 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, ListGroup } from "react-bootstrap";
 import CourseCard from "../components/CourseCard";
 import { Row } from "react-bootstrap";
+import CourseItem from "../components/CourseItem";
 
 const Cart = (props) => {
   return (
     <Container className="cart">
-      <Row className="justify-content-center">
+      <ListGroup>
+        <CourseItem
+          key={-1}
+          course_name="Course name"
+          count="Count"
+          price="Price"
+        />
         {Array.from(props.cart, (v, k) => v[1]).map((value, ind) => (
-          <CourseCard key={value.id} {...value} />
+          <CourseItem key={value.id} {...value} />
         ))}
-      </Row>
+      </ListGroup>
     </Container>
   );
 };
