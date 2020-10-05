@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Container, Card, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Pagination from "./Pagination";
+import CourseCard from "./CourseCard";
 
 const COURSES_ON_ONE_PAGE = 15;
 
@@ -16,18 +16,12 @@ const Courses = (props) => {
         {props?.courses
           .slice(COURSES_ON_ONE_PAGE * (page - 1), COURSES_ON_ONE_PAGE * page)
           .map((val, ind) => (
-            <Card key={ind} border="primary" style={{ margin: "0.2rem" }}>
-              <Link key={ind} to={"/course/" + val.id}>
-                <Card.Body>
-                  <Card.Title>{val.name}</Card.Title>
-                </Card.Body>
-                <Card.Img
-                  variant="bottom"
-                  src={val.picture_url}
-                  alt="noimage"
-                />
-              </Link>
-            </Card>
+            <CourseCard
+              key={val.id}
+              id={val.id}
+              course_name={val.name}
+              picture_url={val.picture_url}
+            />
           ))}
       </Row>
     </Container>

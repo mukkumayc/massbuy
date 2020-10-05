@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Courses from "../components/Courses";
 import Config from "../config";
 import Container from "react-bootstrap/Container";
+import { LinkContainer } from "react-router-bootstrap";
+import { Button } from "react-bootstrap";
 
 const Home = (props) => {
   const [isLoading, setLoading] = useState(true);
@@ -11,7 +13,6 @@ const Home = (props) => {
     fetch(Config.serverUrl + "/courses")
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setCourses(json.courses);
         setLoading(false);
       })
@@ -23,7 +24,14 @@ const Home = (props) => {
 
   return (
     <Container className="home" fluid>
-      {!isLoading && <Courses courses={courses} />}
+      {!isLoading && (
+        <>
+          <LinkContainer to="/cart">
+            <Button>Cart</Button>
+          </LinkContainer>
+          <Courses courses={courses} />
+        </>
+      )}
     </Container>
   );
 };

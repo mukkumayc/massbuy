@@ -6,6 +6,7 @@ import Home from "../containers/Home";
 import NotFound from "../containers/NotFound";
 import Login from "../containers/Login";
 import Course from "../containers/Course";
+import Cart from "../containers/Cart";
 
 const Routes = ({ appProps }) => {
   return (
@@ -24,9 +25,9 @@ const Routes = ({ appProps }) => {
         appProps={appProps}
       />
       <AuthenticatedRoute
-        path="/:page"
+        path="/cart"
         exact
-        component={Home}
+        component={Cart}
         appProps={appProps}
       />
       <Route component={NotFound} />
