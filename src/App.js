@@ -5,7 +5,7 @@ import Config from "./config";
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setAuthenticating] = useState(true);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(new Map());
   const appProps = { isAuthenticated, userHasAuthenticated, cart, setCart };
 
   useEffect(() => {

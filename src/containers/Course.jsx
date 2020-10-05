@@ -5,9 +5,9 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 
 const Course = (props) => {
-  const [isLoading, setLoading] = useState(true);
-  const [course, setCourse] = useState({});
-  const [show, setShow] = useState(false);
+  const [isLoading, setLoading] = useState(true); // loading info about course
+  const [course, setCourse] = useState({}); // information about current course
+  const [show, setShow] = useState(false); // showing alert about success of adding to cart
 
   useEffect(() => {
     let id = window.location.pathname.split("/");
@@ -15,7 +15,6 @@ const Course = (props) => {
     fetch(Config.serverUrl + "/course/" + id)
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setCourse(json);
         setLoading(false);
       })
@@ -39,6 +38,12 @@ const Course = (props) => {
             onSubmit={(values, { setSubmitting }) => {
               setShow(false);
               setSubmitting(true);
+              let courseInCart = props.cart.get(course.id);
+              if (courseInCart) {
+                setShow(true);
+                setSubmitting(false);
+                return;
+              }
               let platform = values.platform.split(":")[0].trim();
               let item = {
                 id: course.id,
@@ -46,7 +51,7 @@ const Course = (props) => {
                 picture_url: course.picture_url,
                 platform: platform,
               };
-              props.setCart(props.cart.concat(item));
+              props.setCart(new Map(props.cart).set(course.id, item));
               setShow(true);
               setSubmitting(false);
             }}

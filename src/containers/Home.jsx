@@ -13,7 +13,6 @@ const Home = (props) => {
     fetch(Config.serverUrl + "/courses")
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
         setCourses(json.courses);
         setLoading(false);
       })
