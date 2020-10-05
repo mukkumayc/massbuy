@@ -1,7 +1,5 @@
 import React from "react";
 import { Container, ListGroup } from "react-bootstrap";
-import CourseCard from "../components/CourseCard";
-import { Row } from "react-bootstrap";
 import CourseItem from "../components/CourseItem";
 
 const Cart = (props) => {
@@ -15,7 +13,18 @@ const Cart = (props) => {
           price="Price"
         />
         {Array.from(props.cart, (v, k) => v[1]).map((value, ind) => (
-          <CourseItem key={value.id} {...value} />
+          <CourseItem
+            key={value.id}
+            {...value}
+            delete={() => {
+              let cart = new Map(props.cart);
+              if (!cart.delete(value.id)) {
+                console.error("Not found the item in cart to delete");
+                return;
+              }
+              props.setCart(cart);
+            }}
+          />
         ))}
       </ListGroup>
     </Container>

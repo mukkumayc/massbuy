@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, ListGroup, Row } from "react-bootstrap";
 
 const CourseItem = (props) => {
   return (
@@ -8,6 +8,13 @@ const CourseItem = (props) => {
         <Col>{props.course_name}</Col>
         <Col>{props.count}</Col>
         <Col>{props.price}</Col>
+        <Col>
+          {props.delete && (
+            <Button variant="danger" onClick={props.delete}>
+              Delete
+            </Button>
+          )}
+        </Col>
       </Row>
     </ListGroup.Item>
   );
