@@ -9,7 +9,10 @@ const createItems = (pagesNum) => {
     for (let number = 1; number <= pagesNum; ++number) {
       locationSearch.set("page", number);
       items.push(
-        <LinkContainer key={number} to={`/?${locationSearch.toString()}`}>
+        <LinkContainer
+          key={number}
+          to={`${window.location.pathname}/?${locationSearch.toString()}`}
+        >
           <Pagination.Item>{number}</Pagination.Item>
         </LinkContainer>
       );
