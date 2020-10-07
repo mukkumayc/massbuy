@@ -3,11 +3,13 @@ import Pagination from "react-bootstrap/Pagination";
 import { LinkContainer } from "react-router-bootstrap";
 
 const createItems = (pagesNum) => {
+  let locationSearch = new URLSearchParams(window.location.search);
   let items = [];
   if (pagesNum < 100) {
     for (let number = 1; number <= pagesNum; ++number) {
+      locationSearch.set("page", number);
       items.push(
-        <LinkContainer key={number} to={"/?page=" + number.toString()}>
+        <LinkContainer key={number} to={`/?${locationSearch.toString()}`}>
           <Pagination.Item>{number}</Pagination.Item>
         </LinkContainer>
       );
