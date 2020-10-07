@@ -11,7 +11,7 @@ const createItems = (pagesNum) => {
       items.push(
         <LinkContainer
           key={number}
-          to={`${window.location.pathname}/?${locationSearch.toString()}`}
+          to={`${window.location.pathname}?${locationSearch.toString()}`}
         >
           <Pagination.Item>{number}</Pagination.Item>
         </LinkContainer>
