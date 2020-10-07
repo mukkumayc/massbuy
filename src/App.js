@@ -6,7 +6,15 @@ function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setAuthenticating] = useState(true);
   const [cart, setCart] = useState(new Map());
-  const appProps = { isAuthenticated, userHasAuthenticated, cart, setCart };
+  const [courses, setCourses] = useState([]);
+  const appProps = {
+    isAuthenticated,
+    userHasAuthenticated,
+    cart,
+    setCart,
+    courses,
+    setCourses,
+  };
 
   useEffect(() => {
     fetch(Config.serverUrl + "/checktoken", {
