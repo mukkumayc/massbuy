@@ -10,11 +10,11 @@ const Courses = (props) => {
   return (
     <Container className="courses" fluid>
       <Pagination
-        pagesNum={Math.ceil(props.courses.length / COURSES_ON_ONE_PAGE)}
+        pagesNum={Math.ceil(props.courses?.length / COURSES_ON_ONE_PAGE)}
       />
       <Row className="justify-content-center">
-        {props?.courses
-          .slice(COURSES_ON_ONE_PAGE * (page - 1), COURSES_ON_ONE_PAGE * page)
+        {props.courses
+          ?.slice(COURSES_ON_ONE_PAGE * (page - 1), COURSES_ON_ONE_PAGE * page)
           .map((val, ind) => (
             <CourseCard
               key={val.id}

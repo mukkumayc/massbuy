@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { withRouter } from "react-router";
 import Routes from "./components/Routes";
+import SearchBar from "./components/SearchBar";
 import Config from "./config";
 
-function App() {
+function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setAuthenticating] = useState(true);
   const [cart, setCart] = useState(new Map());
-  const appProps = { isAuthenticated, userHasAuthenticated, cart, setCart };
+  const [courses, setCourses] = useState([]);
+  const appProps = {
+    isAuthenticated,
+    userHasAuthenticated,
+    cart,
+    setCart,
+    courses,
+    setCourses,
+  };
 
   useEffect(() => {
     fetch(Config.serverUrl + "/checktoken", {
@@ -24,9 +34,21 @@ function App() {
 
   return (
     <div className="App">
-      {!isAuthenticating && <Routes appProps={appProps} />}
+      {!isAuthenticating && (
+        <>
+          {!window.location.pathname.includes("/search") && (
+            <SearchBar
+              {...appProps}
+              search={({ values }) => {
+                props.history.push(`/search?term=${values.term}`);
+              }}
+            />
+          )}
+          <Routes appProps={appProps} />
+        </>
+      )}
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);

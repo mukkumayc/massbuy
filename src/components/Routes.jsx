@@ -7,6 +7,7 @@ import NotFound from "../containers/NotFound";
 import Login from "../containers/Login";
 import Course from "../containers/Course";
 import Cart from "../containers/Cart";
+import Search from "../containers/Search";
 
 const Routes = ({ appProps }) => {
   return (
@@ -28,6 +29,12 @@ const Routes = ({ appProps }) => {
         path="/cart"
         exact
         component={Cart}
+        appProps={appProps}
+      />
+      <AuthenticatedRoute
+        path="/search"
+        exact
+        component={Search}
         appProps={appProps}
       />
       <Route component={NotFound} />
