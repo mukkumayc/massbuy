@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import Routes from "./components/Routes";
-import SearchBar from "./components/SearchBar";
 import Config from "./config";
+import NavBar from "./components/NavBar";
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -36,14 +36,7 @@ function App(props) {
     <div className="App">
       {!isAuthenticating && (
         <>
-          {!window.location.pathname.includes("/search") && (
-            <SearchBar
-              {...appProps}
-              search={({ values }) => {
-                props.history.push(`/search?term=${values.term}`);
-              }}
-            />
-          )}
+          <NavBar {...appProps} />
           <Routes appProps={appProps} />
         </>
       )}

@@ -31,7 +31,7 @@ const SearchBar = (props) => {
               type="text"
               placeholder="Search for courses"
               onChange={handleChange}
-              value={values.term}
+              value={values.term || ""}
             />
           </Form.Group>
           <Button variant="primary" type="submit" disabled={isSubmitting}>
