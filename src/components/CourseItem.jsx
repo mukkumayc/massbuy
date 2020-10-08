@@ -1,16 +1,82 @@
 import React from "react";
-import { Button, Col, ListGroup, Row } from "react-bootstrap";
+import { Formik, FieldArray } from "formik";
+import { Button, Col, ListGroup, Row, Form } from "react-bootstrap";
 
 const CourseItem = (props) => {
+  const {
+    course_name,
+    count,
+    platforms,
+    values,
+    index,
+    handleChange,
+    deleteItem,
+    platform,
+    price,
+    setFieldValue,
+  } = props;
+  const { courses } = values || {};
   return (
     <ListGroup.Item>
       <Row>
-        <Col>{props.course_name}</Col>
-        <Col>{props.count}</Col>
-        <Col>{props.price}</Col>
+        <Col>{course_name}</Col>
         <Col>
-          {props.delete && (
-            <Button variant="danger" onClick={props.delete}>
+          {values ? (
+            <>
+              <Button
+                variant="danger"
+                onClick={() =>
+                  courses[index].count > 0 &&
+                  setFieldValue(
+                    `courses[${index}].count`,
+                    courses[index].count - 1
+                  )
+                }
+              >
+                -
+              </Button>
+              {courses[index].count}
+              <Button
+                variant="success"
+                onClick={() =>
+                  setFieldValue(
+                    `courses[${index}].count`,
+                    courses[index].count + 1
+                  )
+                }
+              >
+                +
+              </Button>
+            </>
+          ) : (
+            count
+          )}
+        </Col>
+        <Col>
+          {platforms ? (
+            <Form.Control
+              as="select"
+              name={`courses[${index}].platform`}
+              onChange={handleChange}
+              defaultValue={courses[index].platform}
+            >
+              {platforms?.map((p, ind) => (
+                <option key={ind}>{`${p.name}`}</option>
+              ))}
+            </Form.Control>
+          ) : (
+            platform
+          )}
+        </Col>
+        <Col>
+          {platforms
+            ? platforms?.find((pl) => pl.name === courses[index].platform)
+                ?.price
+            : price}
+        </Col>
+        <Col>
+          {deleteItem && (
+            <Button variant="danger" onClick={deleteItem}>
               Delete
             </Button>
           )}

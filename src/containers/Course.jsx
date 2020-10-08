@@ -68,9 +68,10 @@ const Course = (props) => {
                       as="select"
                       name="platform"
                       onChange={handleChange}
+                      defaultValue="default"
                     >
-                      <option disabled selected value key={-1}>
-                        -- select an option --
+                      <option disabled value="default" key={-1}>
+                        -- select an platform --
                       </option>
                       {course.platforms.map((p, ind) => (
                         <option key={ind}>{`${p.name}: ${p.price}`}</option>

@@ -8,6 +8,8 @@ import Login from "../containers/Login";
 import Course from "../containers/Course";
 import Cart from "../containers/Cart";
 import Search from "../containers/Search";
+import { FriendList } from "../containers/FriendList";
+import { FriendListOld } from "../containers/FriendListOld";
 
 const Routes = ({ appProps }) => {
   return (
@@ -35,6 +37,18 @@ const Routes = ({ appProps }) => {
         path="/search"
         exact
         component={Search}
+        appProps={appProps}
+      />
+      <AuthenticatedRoute
+        path="/friend"
+        exact
+        component={FriendList}
+        appProps={appProps}
+      />
+      <AuthenticatedRoute
+        path="/friendold"
+        exact
+        component={FriendListOld}
         appProps={appProps}
       />
       <Route component={NotFound} />
