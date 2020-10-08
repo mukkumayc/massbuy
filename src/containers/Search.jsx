@@ -6,7 +6,7 @@ import SearchBar from "../components/SearchBar";
 
 const Search = (props) => {
   const [result, setResult] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(true);
 
   async function search(term) {
     if (!term) {
@@ -14,13 +14,16 @@ const Search = (props) => {
       return;
     }
     props.history.push(`/search?term=${term}`);
+    let courses = props.courses;
     if (props.courses?.length === 0) {
-      await fetchCourses(props.setCourses, setLoading);
+      courses = await fetchCourses();
+      props.setCourses(courses);
     }
-    let res = props.courses?.filter((course) => course.name.includes(term));
+    let res = courses?.filter((course) => course.name.includes(term));
+    console.log(props.courses.length, courses.length, res.length);
     setResult(res);
     setLoading(false);
-    console.log(res.length);
+    return res;
   }
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const Search = (props) => {
   return (
     <Container className="search" fluid>
       <SearchBar search={({ values }) => search(values.term)} />
-      {loading || <Courses courses={result} />}
+      {isLoading || <Courses courses={result} />}
     </Container>
   );
 };

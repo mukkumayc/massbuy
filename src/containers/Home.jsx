@@ -9,7 +9,14 @@ const Home = (props) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCourses(props.setCourses, setLoading);
+    fetchCourses()
+      .then((res) => {
+        props.setCourses(res);
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+      .then(() => setLoading(false));
   }, []);
 
   return (

@@ -1,16 +1,16 @@
 import Config from "../config";
 
-const fetchCourses = async (setCourses, setLoading) => {
+const fetchCourses = async () => {
+  let courses = null;
   await fetch(Config.serverUrl + "/courses")
     .then((res) => res.json())
     .then((json) => {
-      setCourses(json.courses);
-      setLoading(false);
+      courses = json.courses;
     })
     .catch((e) => {
       console.error(e);
-      setLoading(false);
     });
+  return courses;
 };
 
 export default fetchCourses;

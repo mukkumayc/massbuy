@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { withRouter } from "react-router";
 
 const SearchBar = (props) => {
   if (!props.search) {
@@ -15,16 +14,13 @@ const SearchBar = (props) => {
         term: new URLSearchParams(window.location.search).get("term"),
       }}
       validationSchema={Yup.object().shape({
-        term: Yup.string().required("Please select a platform"),
+        term: Yup.string().required(),
       })}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
-        console.log("start searching!");
-        props.search({ values }).then(() => {
-          console.log("end searching!");
+        props.search({ values }).then((res) => {
           setSubmitting(false);
         });
-        // props.history.push(`/search?term=${values.term}`);
       }}
     >
       {({ handleChange, handleSubmit, isSubmitting, values }) => (
@@ -41,11 +37,10 @@ const SearchBar = (props) => {
           <Button variant="primary" type="submit" disabled={isSubmitting}>
             Search
           </Button>
-          <div>{JSON.stringify(values)}</div>
         </Form>
       )}
     </Formik>
   );
 };
 
-export default withRouter(SearchBar);
+export default SearchBar;
