@@ -26,11 +26,12 @@ const CourseItem = (props) => {
               <Button
                 variant="danger"
                 onClick={() =>
-                  courses[index].count > 0 &&
-                  setFieldValue(
-                    `courses[${index}].count`,
-                    courses[index].count - 1
-                  )
+                  courses[index].count > 1
+                    ? setFieldValue(
+                        `courses[${index}].count`,
+                        courses[index].count - 1
+                      )
+                    : deleteItem()
                 }
               >
                 -
