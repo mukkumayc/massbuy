@@ -1,6 +1,6 @@
-import React from "react";
-import { Formik, FieldArray } from "formik";
+import React, { useState } from "react";
 import { Button, Col, ListGroup, Row, Form } from "react-bootstrap";
+import DefaultModal from "./DefaultModal";
 
 const CourseItem = (props) => {
   const {
@@ -15,6 +15,8 @@ const CourseItem = (props) => {
     price,
     setFieldValue,
   } = props;
+
+  const [isDeleting, setDeleting] = useState(false);
   const { courses } = values || {};
   return (
     <ListGroup.Item>
@@ -31,7 +33,7 @@ const CourseItem = (props) => {
                         `courses[${index}].count`,
                         courses[index].count - 1
                       )
-                    : deleteItem()
+                    : setDeleting(true)
                 }
               >
                 -
@@ -77,12 +79,23 @@ const CourseItem = (props) => {
         </Col>
         <Col>
           {deleteItem && (
-            <Button variant="danger" onClick={deleteItem}>
+            <Button variant="danger" onClick={() => setDeleting(true)}>
               Delete
             </Button>
           )}
         </Col>
       </Row>
+      <DefaultModal
+        show={isDeleting}
+        acceptButtonVariant="danger"
+        acceptButtonText="Delete"
+        bodyText="Are you sure you want to delete?"
+        handleCancel={() => setDeleting(false)}
+        handleAccept={() => {
+          deleteItem();
+          setDeleting(false);
+        }}
+      />
     </ListGroup.Item>
   );
 };
