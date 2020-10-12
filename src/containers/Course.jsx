@@ -38,7 +38,7 @@ const Course = (props) => {
             onSubmit={(values, { setSubmitting }) => {
               setShow(false);
               setSubmitting(true);
-              let courseInCart = props.cart.get(course.id);
+              let courseInCart = props.cart.getItem(course.id);
               if (courseInCart) {
                 setShow(true);
                 setSubmitting(false);
@@ -54,7 +54,7 @@ const Course = (props) => {
                 price: price.trim(),
                 count: 1,
               };
-              props.setCart(new Map(props.cart).set(course.id, item));
+              props.cart.setItem(course.id, item);
               setShow(true);
               setSubmitting(false);
             }}

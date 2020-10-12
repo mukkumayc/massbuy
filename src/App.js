@@ -3,17 +3,18 @@ import { withRouter } from "react-router";
 import Routes from "./components/Routes";
 import Config from "./config";
 import NavBar from "./components/NavBar";
+import CartWrapper from "./components/CartWrapper";
+
+const cart = new CartWrapper();
 
 function App(props) {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setAuthenticating] = useState(true);
-  const [cart, setCart] = useState(new Map());
   const [courses, setCourses] = useState([]);
   const appProps = {
     isAuthenticated,
     userHasAuthenticated,
     cart,
-    setCart,
     courses,
     setCourses,
   };
