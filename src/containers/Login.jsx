@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import Config from "../config";
-import Container from "react-bootstrap/Container";
+import { Container, Row, Col, Form } from "react-bootstrap";
 
 class Login extends Component {
   state = {
@@ -11,54 +11,58 @@ class Login extends Component {
 
   render() {
     return (
-      <Container className="login">
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          validationSchema={Yup.object().shape({
-            email: Yup.string()
-              .required("Email is required")
-              .email("Invalid email"),
-            password: Yup.string().required("Password is required"),
-          })}
-          onSubmit={(values, { setSubmitting }) =>
-            this.handleSubmit(values, setSubmitting)
-          }
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <div className="form-group">
-                <label htmlFor="login-email">Email</label>
-                <Field
-                  className="form-control"
-                  type="email"
-                  name="email"
-                  id="login-email"
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="login-password">Password</label>
-                <Field
-                  className="form-control"
-                  type="password"
-                  name="password"
-                  id="login-password"
-                />
-              </div>
-              <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={isSubmitting}
-              >
-                Sign in
-              </button>
-              {this.state.errorMsg ? (
-                <div className="alert alert-danger m-3">
-                  {this.state.errorMsg}
-                </div>
-              ) : null}
-            </Form>
-          )}
-        </Formik>
+      <Container className="login" fluid>
+        <Row className="justify-content-center">
+          <Col sm={10} md={8} lg={4}>
+            <Formik
+              initialValues={{ email: "", password: "" }}
+              validationSchema={Yup.object().shape({
+                email: Yup.string()
+                  .required("Email is required")
+                  .email("Invalid email"),
+                password: Yup.string().required("Password is required"),
+              })}
+              onSubmit={(values, { setSubmitting }) =>
+                this.handleSubmit(values, setSubmitting)
+              }
+            >
+              {({ isSubmitting, handleSubmit, handleChange }) => (
+                <Form onSubmit={handleSubmit}>
+                  <Form.Group>
+                    <Form.Label for="login-email">Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      name="email"
+                      id="login-email"
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label for="login-password">Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      id="login-password"
+                      onChange={handleChange}
+                    />
+                  </Form.Group>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={isSubmitting}
+                  >
+                    Sign in
+                  </button>
+                  {this.state.errorMsg ? (
+                    <div className="alert alert-danger m-3">
+                      {this.state.errorMsg}
+                    </div>
+                  ) : null}
+                </Form>
+              )}
+            </Formik>
+          </Col>
+        </Row>
       </Container>
     );
   }
