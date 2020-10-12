@@ -7,7 +7,7 @@ const CourseCard = (props) => {
     <Card
       border="primary"
       className="course-card"
-      style={{ "min-width": "300px", margin: "0.2em", "min-height": "276px" }}
+      style={{ minWidth: "300px", margin: "0.2em", minHeight: "276px" }}
     >
       <Link to={"/course/" + props.id}>
         <Card.Body>
