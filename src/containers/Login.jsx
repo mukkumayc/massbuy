@@ -29,7 +29,7 @@ class Login extends Component {
               {({ isSubmitting, handleSubmit, handleChange }) => (
                 <Form onSubmit={handleSubmit}>
                   <Form.Group>
-                    <Form.Label for="login-email">Email</Form.Label>
+                    <Form.Label htmlFor="login-email">Email</Form.Label>
                     <Form.Control
                       type="email"
                       name="email"
@@ -38,7 +38,7 @@ class Login extends Component {
                     />
                   </Form.Group>
                   <Form.Group>
-                    <Form.Label for="login-password">Password</Form.Label>
+                    <Form.Label htmlFor="login-password">Password</Form.Label>
                     <Form.Control
                       type="password"
                       name="password"
