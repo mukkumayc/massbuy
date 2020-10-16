@@ -5,10 +5,9 @@ import Courses from "../components/Courses";
 import fetchCourses from "../components/fetchCourses";
 import SearchBar from "../components/SearchBar";
 
-const Search = (props) => {
+const Search = ({ history, courses, setCourses }) => {
   const [result, setResult] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const { history, courses, setCourses } = props;
 
   const search = useCallback(
     async (term) => {
@@ -22,7 +21,7 @@ const Search = (props) => {
         c = await fetchCourses();
         setCourses(c);
       }
-      let res = c?.filter((course) => course.name.includes(term));
+      let res = c?.filter((course) => course.title.includes(term));
       setResult(res);
       setLoading(false);
       return res;

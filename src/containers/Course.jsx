@@ -4,7 +4,7 @@ import { Jumbotron, Container, Button, Form, Alert } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-const Course = (props) => {
+const Course = ({ cart }) => {
   const [isLoading, setLoading] = useState(true); // loading info about course
   const [course, setCourse] = useState({}); // information about current course
   const [show, setShow] = useState(false); // showing alert about success of adding to cart
@@ -38,7 +38,7 @@ const Course = (props) => {
             onSubmit={(values, { setSubmitting }) => {
               setShow(false);
               setSubmitting(true);
-              let courseInCart = props.cart.getItem(course.id);
+              let courseInCart = cart.getItem(course.id);
               if (courseInCart) {
                 setShow(true);
                 setSubmitting(false);
@@ -54,7 +54,7 @@ const Course = (props) => {
                 price: price.trim(),
                 count: 1,
               };
-              props.cart.setItem(course.id, item);
+              cart.setItem(course.id, item);
               setShow(true);
               setSubmitting(false);
             }}

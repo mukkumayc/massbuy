@@ -3,9 +3,8 @@ import Courses from "../components/Courses";
 import Container from "react-bootstrap/Container";
 import fetchCourses from "../components/fetchCourses";
 
-const Home = (props) => {
+const Home = ({ courses, setCourses }) => {
   const [isLoading, setLoading] = useState(true);
-  const { setCourses } = props;
 
   useEffect(() => {
     fetchCourses()
@@ -20,7 +19,7 @@ const Home = (props) => {
 
   return (
     <Container className="home" fluid>
-      {!isLoading && <Courses courses={props.courses} />}
+      {!isLoading && <Courses courses={courses} />}
     </Container>
   );
 };

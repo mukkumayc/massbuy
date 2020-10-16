@@ -3,16 +3,14 @@ import { Container, Form, ListGroup } from "react-bootstrap";
 import CourseItem from "../components/CourseItem";
 import { FieldArray, Formik } from "formik";
 
-const Cart = (props) => {
+const Cart = ({ cart }) => {
   return (
     <Container className="cart">
       <Formik
         initialValues={{
-          courses: Array.from(props.cart.data(), (v, k) => v[1]).map(
-            (value, ind) => {
-              return { ...value };
-            }
-          ),
+          courses: Array.from(cart.data(), (v, k) => v[1]).map((value, ind) => {
+            return { ...value };
+          }),
         }}
       >
         {({ values, handleChange, handleSubmit, setFieldValue }) => (
@@ -27,30 +25,28 @@ const Cart = (props) => {
                     price="Price"
                     platform="Platform"
                   />
-                  {Array.from(props.cart.data(), (v, k) => v[1]).map(
-                    (value, ind) => {
-                      return (
-                        <CourseItem
-                          index={ind}
-                          key={value.id}
-                          {...value}
-                          deleteItem={() => {
-                            if (!props.cart.removeItem(value.id)) {
-                              console.error(
-                                "Not found the item in cart to delete"
-                              );
-                              return;
-                            }
+                  {Array.from(cart.data(), (v, k) => v[1]).map((value, ind) => {
+                    return (
+                      <CourseItem
+                        index={ind}
+                        key={value.id}
+                        {...value}
+                        deleteItem={() => {
+                          if (!cart.removeItem(value.id)) {
+                            console.error(
+                              "Not found the item in cart to delete"
+                            );
+                            return;
+                          }
 
-                            remove(ind);
-                          }}
-                          handleChange={handleChange}
-                          values={values}
-                          setFieldValue={setFieldValue}
-                        />
-                      );
-                    }
-                  )}
+                          remove(ind);
+                        }}
+                        handleChange={handleChange}
+                        values={values}
+                        setFieldValue={setFieldValue}
+                      />
+                    );
+                  })}
                   <ListGroup.Item>
                     Total:{" "}
                     {values.courses

@@ -3,8 +3,8 @@ import { Button, Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-const SearchBar = (props) => {
-  if (!props.search) {
+const SearchBar = ({ search }) => {
+  if (!search) {
     console.error("No search function, don't know what to do");
     return;
   }
@@ -18,7 +18,7 @@ const SearchBar = (props) => {
       })}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
-        props.search({ values }).then((res) => {
+        search({ values }).then((res) => {
           setSubmitting(false);
         });
       }}
