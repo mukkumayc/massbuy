@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCallback } from "react";
 import { Container } from "react-bootstrap";
 import Courses from "../components/Courses";
-import fetchCourses from "../components/fetchCourses";
+import fetchCourses from "../lib/fetchCourses";
 import SearchBar from "../components/SearchBar";
 
 const Search = ({ history, courses, setCourses }) => {

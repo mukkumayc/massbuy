@@ -2,12 +2,12 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import AuthenticatedRoute from "./AuthenticatedRoute";
 import UnauthenticatedRoute from "./UnauthenticatedRoute";
-import Home from "../containers/Home";
-import NotFound from "../containers/NotFound";
-import Login from "../containers/Login";
-import Course from "../containers/Course";
-import Cart from "../containers/Cart";
-import Search from "../containers/Search";
+import Home from "../../containers/Home";
+import NotFound from "../../containers/NotFound";
+import Login from "../../containers/Login";
+import Course from "../../containers/Course";
+import Cart from "../../containers/Cart";
+import Search from "../../containers/Search";
 
 const Routes = ({ appProps }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
-import Routes from "./components/Routes";
+import Routes from "./components/routing/Routes";
 import Config from "./config";
 import NavBar from "./components/NavBar";
 import CartWrapper from "./components/CartWrapper";

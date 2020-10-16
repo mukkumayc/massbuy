@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Courses from "../components/Courses";
 import Container from "react-bootstrap/Container";
-import fetchCourses from "../components/fetchCourses";
+import fetchCourses from "../lib/fetchCourses";
 
 const Home = ({ courses, setCourses }) => {
   const [isLoading, setLoading] = useState(true);
