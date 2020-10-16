@@ -18,13 +18,6 @@ const Cart = ({ cart }) => {
             <FieldArray name="courses">
               {({ remove }) => (
                 <ListGroup>
-                  <CourseItem
-                    key={-1}
-                    title="Course name"
-                    count="Count"
-                    price="Price"
-                    platform="Platform"
-                  />
                   {Array.from(cart.data(), (v, k) => v[1]).map((value, ind) => {
                     return (
                       <CourseItem

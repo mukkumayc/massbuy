@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Button, Col, ListGroup, Row, Form } from "react-bootstrap";
 import DefaultModal from "./DefaultModal";
+import Counter from "./Counter";
+import "./CourseItem.css";
 
 const CourseItem = (props) => {
   const {
@@ -11,8 +13,6 @@ const CourseItem = (props) => {
     index,
     handleChange,
     deleteItem,
-    platform,
-    price,
     setFieldValue,
   } = props;
 
@@ -20,71 +20,53 @@ const CourseItem = (props) => {
   const { courses } = values || {};
   return (
     <ListGroup.Item>
-      <Row>
-        <Col>{title}</Col>
-        <Col>
-          {values ? (
-            <>
-              <Button
-                variant="danger"
-                onClick={() =>
-                  courses[index].count > 1
-                    ? setFieldValue(
-                        `courses[${index}].count`,
-                        courses[index].count - 1
-                      )
-                    : setDeleting(true)
-                }
-              >
-                -
-              </Button>
-              {courses[index].count}
-              <Button
-                variant="success"
-                onClick={() =>
-                  setFieldValue(
-                    `courses[${index}].count`,
-                    courses[index].count + 1
-                  )
-                }
-              >
-                +
-              </Button>
-            </>
-          ) : (
-            count
-          )}
-        </Col>
-        <Col>
-          {platforms ? (
-            <Form.Control
-              as="select"
-              name={`courses[${index}].platform`}
-              onChange={handleChange}
-              defaultValue={courses[index].platform}
-            >
-              {platforms?.map((p, ind) => (
-                <option key={ind}>{`${p.name}`}</option>
-              ))}
-            </Form.Control>
-          ) : (
-            platform
-          )}
-        </Col>
-        <Col>
-          {platforms
-            ? platforms?.find((pl) => pl.name === courses[index].platform)
+      <div className="d-flex flex-row justify-content-between">
+        <h3>{title}</h3>
+        {values ? (
+          <Counter
+            count={courses[index].count}
+            setCount={(value) => {
+              setFieldValue(`courses[${index}].count`, value);
+            }}
+            setDeleting={setDeleting}
+          />
+        ) : (
+          count
+        )}
+      </div>
+      <div className="d-flex flex-row justify-content-between">
+        <h5>
+          <b>
+            {
+              platforms?.find((pl) => pl.name === courses[index].platform)
                 ?.price
-            : price}
-        </Col>
-        <Col>
-          {deleteItem && (
-            <Button variant="danger" onClick={() => setDeleting(true)}>
-              Delete
-            </Button>
-          )}
-        </Col>
-      </Row>
+            }
+          </b>
+        </h5>
+      </div>
+      <div className="d-flex flex-row justify-content-between">
+        <Form.Control
+          id="platform-input"
+          as="select"
+          name={`courses[${index}].platform`}
+          onChange={handleChange}
+          defaultValue={courses[index].platform}
+        >
+          {platforms?.map((p, ind) => (
+            <option key={ind}>{`${p.name}`}</option>
+          ))}
+        </Form.Control>
+
+        {deleteItem && (
+          <Button
+            className="ml-3"
+            variant="danger"
+            onClick={() => setDeleting(true)}
+          >
+            Delete
+          </Button>
+        )}
+      </div>
       <DefaultModal
         show={isDeleting}
         acceptButtonVariant="danger"

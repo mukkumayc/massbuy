@@ -30,7 +30,7 @@ const SearchBar = ({ search }) => {
             className="d-flex search-wrapper"
             style={{
               width: "100%",
-              border: "1px solid #ced4da",
+              border: "1px solid var(--primary)",
               borderRadius: ".25rem",
             }}
           >
@@ -46,11 +46,12 @@ const SearchBar = ({ search }) => {
             />
             <Button
               className="p-2"
-              variant="primary"
+              variant="outline-primary"
               type="submit"
               disabled={isSubmitting}
               style={{
-                borderRadius: "0 .25rem .25rem 0",
+                borderRadius: "0 .1rem .1rem 0",
+                borderWidth: "0 0 0 1px",
               }}
             >
               <svg

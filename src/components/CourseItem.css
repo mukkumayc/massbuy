@@ -1,0 +1,5 @@
+@media (min-width: 300px) {
+  #platform-input {
+    max-width: 300px;
+  }
+}
