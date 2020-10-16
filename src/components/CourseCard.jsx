@@ -11,9 +11,9 @@ const CourseCard = (props) => {
     >
       <Link to={"/course/" + props.id}>
         <Card.Body>
-          <Card.Title>{props.course_name}</Card.Title>
+          <Card.Title>{props.title}</Card.Title>
         </Card.Body>
-        <Card.Img variant="bottom" src={props.picture_url} alt="noimage" />
+        <Card.Img variant="bottom" src={props.cover} alt="noimage" />
       </Link>
     </Card>
   );

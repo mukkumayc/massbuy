@@ -4,7 +4,7 @@ import DefaultModal from "./DefaultModal";
 
 const CourseItem = (props) => {
   const {
-    course_name,
+    title,
     count,
     platforms,
     values,
@@ -21,7 +21,7 @@ const CourseItem = (props) => {
   return (
     <ListGroup.Item>
       <Row>
-        <Col>{course_name}</Col>
+        <Col>{title}</Col>
         <Col>
           {values ? (
             <>

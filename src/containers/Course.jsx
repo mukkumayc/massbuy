@@ -28,7 +28,7 @@ const Course = (props) => {
     <Container className="course">
       {!isLoading && (
         <Jumbotron>
-          <h2>{course.name}</h2>
+          <h2>{course.title}</h2>
           <p>{course.description}</p>
           <Formik
             initialValues={{ platform: "" }}
@@ -47,8 +47,8 @@ const Course = (props) => {
               const [platform, price] = values.platform.split(":");
               let item = {
                 id: course.id,
-                course_name: course.name,
-                picture_url: course.picture_url,
+                title: course.title,
+                cover: course.cover,
                 platforms: course.platforms,
                 platform: platform.trim(),
                 price: price.trim(),

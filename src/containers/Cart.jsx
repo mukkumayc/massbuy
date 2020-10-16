@@ -22,7 +22,7 @@ const Cart = (props) => {
                 <ListGroup>
                   <CourseItem
                     key={-1}
-                    course_name="Course name"
+                    title="Course name"
                     count="Count"
                     price="Price"
                     platform="Platform"

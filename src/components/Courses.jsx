@@ -22,8 +22,8 @@ const Courses = (props) => {
             <CourseCard
               key={val.id}
               id={val.id}
-              course_name={val.name}
-              picture_url={val.picture_url}
+              title={val.title}
+              cover={val.cover}
             />
           ))}
       </Row>
