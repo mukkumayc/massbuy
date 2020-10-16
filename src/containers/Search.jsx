@@ -35,7 +35,10 @@ const Search = ({ history, courses, setCourses }) => {
 
   return (
     <Container className="search" fluid>
-      <SearchBar search={({ values }) => search(values.term)} />
+      <div className="d-flex justify-content-center">
+        <SearchBar search={({ values }) => search(values.term)} />
+      </div>
+
       {isLoading || <Courses courses={result} />}
     </Container>
   );

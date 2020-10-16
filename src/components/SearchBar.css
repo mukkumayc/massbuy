@@ -1,0 +1,5 @@
+@media (min-width: 576px) {
+  form.search-bar {
+    width: 550px;
+  }
+}
