@@ -8,7 +8,7 @@ const Actions = ({ cart, course }) => {
   const [show, setShow] = useState(false); // showing alert about successful adding to cart
 
   return (
-    <Card>
+    <Card className="actions">
       <Card.Body>
         <Formik
           initialValues={{ platform: "" }}
@@ -59,16 +59,18 @@ const Actions = ({ cart, course }) => {
                 </Form.Group>
                 <div className="d-flex justify-content-between">
                   <div className="price">
-                    {
-                      course.platforms.find((e) => {
-                        console.log(
-                          e.name,
-                          values.platform,
-                          e.name === values.platform
-                        );
-                        return e.name === values.platform;
-                      })?.price
-                    }
+                    {course.platforms.find((e) => {
+                      console.log(
+                        e.name,
+                        values.platform,
+                        e.name === values.platform
+                      );
+                      return e.name === values.platform;
+                    })?.price || (
+                      <div className="text-secondary font-weight-light">
+                        Select to see price
+                      </div>
+                    )}
                   </div>
                   <Button type="submit" disabled={isSubmitting}>
                     Add to cart

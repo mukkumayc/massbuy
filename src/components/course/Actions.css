@@ -1,3 +1,14 @@
+@media (max-width: 768px) {
+  .actions {
+    position: fixed !important;
+    left: 0 !important;
+    border-radius: 0% !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    /* background-color: #f5f5f5; */
+  }
+}
+
 #select-platform-input select, #select-platform-input button {
   font-size: 1em;
   font-weight: 300;
