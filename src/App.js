@@ -4,6 +4,7 @@ import Routes from "./components/routing/Routes";
 import Config from "./config";
 import NavBar from "./components/NavBar";
 import CartWrapper from "./components/CartWrapper";
+import "./App.css";
 
 const cart = new CartWrapper();
 

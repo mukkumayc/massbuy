@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, ListGroup, Row, Form } from "react-bootstrap";
+import { Button, ListGroup, Form } from "react-bootstrap";
 import DefaultModal from "./DefaultModal";
 import Counter from "./Counter";
 import "./CourseItem.css";
@@ -35,14 +35,9 @@ const CourseItem = (props) => {
         )}
       </div>
       <div className="d-flex flex-row justify-content-between">
-        <h5>
-          <b>
-            {
-              platforms?.find((pl) => pl.name === courses[index].platform)
-                ?.price
-            }
-          </b>
-        </h5>
+        <div className="price">
+          {platforms?.find((pl) => pl.name === courses[index].platform)?.price}
+        </div>
       </div>
       <div className="d-flex flex-row justify-content-between">
         <Form.Control

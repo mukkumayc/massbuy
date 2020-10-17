@@ -24,14 +24,14 @@ const Actions = ({ cart, course }) => {
               setSubmitting(false);
               return;
             }
-            const [platform, price] = values.platform.split(":");
+            const platform = values.platform;
             let item = {
               id: course.id,
               title: course.title,
               cover: course.cover,
               platforms: course.platforms,
-              platform: platform.trim(),
-              price: price.trim(),
+              platform: platform,
+              price: course.platforms.find((e) => e.platform === platform),
               count: 1,
             };
             cart.setItem(course.id, item);
@@ -39,7 +39,7 @@ const Actions = ({ cart, course }) => {
             setSubmitting(false);
           }}
         >
-          {({ handleChange, handleSubmit, isSubmitting }) => (
+          {({ values, handleChange, handleSubmit, isSubmitting }) => (
             <>
               <Form onSubmit={handleSubmit} id="select-platform-input">
                 <Form.Group>
@@ -53,13 +53,27 @@ const Actions = ({ cart, course }) => {
                       -- select an platform --
                     </option>
                     {course.platforms.map((p, ind) => (
-                      <option key={ind}>{`${p.name}: ${p.price}`}</option>
+                      <option key={ind}>{p.name}</option>
                     ))}
                   </Form.Control>
                 </Form.Group>
-                <Button type="submit" className="mx-2" disabled={isSubmitting}>
-                  Add to cart
-                </Button>
+                <div className="d-flex justify-content-between">
+                  <div className="price">
+                    {
+                      course.platforms.find((e) => {
+                        console.log(
+                          e.name,
+                          values.platform,
+                          e.name === values.platform
+                        );
+                        return e.name === values.platform;
+                      })?.price
+                    }
+                  </div>
+                  <Button type="submit" disabled={isSubmitting}>
+                    Add to cart
+                  </Button>
+                </div>
               </Form>
 
               {show && (

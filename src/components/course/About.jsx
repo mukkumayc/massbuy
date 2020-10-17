@@ -5,12 +5,10 @@ const About = ({ course }) => {
     <Card>
       <Card.Body>
         <Card.Title>
-          <h1>{course.title}</h1>
+          <h2>{course.title}</h2>
         </Card.Title>
 
-        <Card.Text>
-          <p className="lead">{course.description}</p>
-        </Card.Text>
+        <Card.Text>{course.description}</Card.Text>
       </Card.Body>
     </Card>
   );
