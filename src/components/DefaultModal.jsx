@@ -13,12 +13,19 @@ const DefaultModal = ({
     <Modal show={show} onHide={handleCancel} animation={false}>
       <Modal.Body> {bodyText} </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleCancel}>
-          Cancel
-        </Button>
-        <Button variant={acceptButtonVariant} onClick={handleAccept}>
-          {acceptButtonText}
-        </Button>
+        {handleCancel && (
+          <Button variant="secondary" onClick={handleCancel}>
+            Cancel
+          </Button>
+        )}
+        {handleAccept && (
+          <Button
+            variant={acceptButtonVariant || "primary"}
+            onClick={handleAccept}
+          >
+            {acceptButtonText || "Accept"}
+          </Button>
+        )}
       </Modal.Footer>
     </Modal>
   );
