@@ -1,0 +1,8 @@
+#select-platform-input select, #select-platform-input button {
+  font-size: 1.25em;
+  font-weight: 300;
+}
+
+.card {
+  margin-top: 15px;
+}
