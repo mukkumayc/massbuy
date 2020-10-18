@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/massbuy/static/css/main.d6e38a34.chunk.css",
+    "main.js": "/massbuy/static/js/main.9ace6bda.chunk.js",
+    "main.js.map": "/massbuy/static/js/main.9ace6bda.chunk.js.map",
+    "runtime-main.js": "/massbuy/static/js/runtime-main.37de7a8c.js",
+    "runtime-main.js.map": "/massbuy/static/js/runtime-main.37de7a8c.js.map",
+    "static/css/2.d9ad5f5c.chunk.css": "/massbuy/static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.7fc44271.chunk.js": "/massbuy/static/js/2.7fc44271.chunk.js",
+    "static/js/2.7fc44271.chunk.js.map": "/massbuy/static/js/2.7fc44271.chunk.js.map",
+    "index.html": "/massbuy/index.html",
+    "precache-manifest.d10ac90229b7cbc411b2a0e7851c5244.js": "/massbuy/precache-manifest.d10ac90229b7cbc411b2a0e7851c5244.js",
+    "service-worker.js": "/massbuy/service-worker.js",
+    "static/css/2.d9ad5f5c.chunk.css.map": "/massbuy/static/css/2.d9ad5f5c.chunk.css.map",
+    "static/css/main.d6e38a34.chunk.css.map": "/massbuy/static/css/main.d6e38a34.chunk.css.map",
+    "static/js/2.7fc44271.chunk.js.LICENSE.txt": "/massbuy/static/js/2.7fc44271.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.37de7a8c.js",
+    "static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.7fc44271.chunk.js",
+    "static/css/main.d6e38a34.chunk.css",
+    "static/js/main.9ace6bda.chunk.js"
+  ]
+}
