@@ -3,6 +3,7 @@ import Config from "../config";
 import { Container, Row, Col } from "react-bootstrap";
 import Actions from "../components/course/Actions";
 import About from "../components/course/About";
+import "./Course.css";
 
 const Course = ({ cart }) => {
   const [isLoading, setLoading] = useState(true); // loading info about course

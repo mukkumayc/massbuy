@@ -2,3 +2,13 @@
   font-size: large;
   font-weight: bold;
 }
+
+@media (max-width: 767.98px) {
+  .footer-on-small-devices {
+    position: fixed !important;
+    left: 0 !important;
+    border-radius: 0% !important;
+    bottom: 0 !important;
+    width: 100% !important;
+  }
+}

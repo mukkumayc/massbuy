@@ -8,7 +8,7 @@ const Actions = ({ cart, course }) => {
   const [show, setShow] = useState(false); // showing alert about successful adding to cart
 
   return (
-    <Card className="actions">
+    <Card className="actions footer-on-small-devices">
       <Card.Body>
         <Formik
           initialValues={{ platform: "" }}
@@ -31,7 +31,7 @@ const Actions = ({ cart, course }) => {
               cover: course.cover,
               platforms: course.platforms,
               platform: platform,
-              price: course.platforms.find((e) => e.platform === platform),
+              price: course.platforms.find((e) => e.name === platform).price,
               count: 1,
             };
             cart.setItem(course.id, item);

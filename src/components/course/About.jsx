@@ -2,7 +2,7 @@ import React from "react";
 import { Card } from "react-bootstrap";
 const About = ({ course }) => {
   return (
-    <Card>
+    <Card className="about">
       <Card.Body>
         <Card.Title>
           <h2>{course.title}</h2>
