@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Card, Button, Form, Alert } from "react-bootstrap";
+import { Card, Button, Form } from "react-bootstrap";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import DefaultModal from "../DefaultModal";
 import "./Actions.css";
 
 const Actions = ({ cart, course }) => {
   const [show, setShow] = useState(false); // showing alert about successful adding to cart
+  const [status, setStatus] = useState("");
 
   return (
     <Card className="actions footer-on-small-devices">
@@ -20,6 +22,7 @@ const Actions = ({ cart, course }) => {
             setSubmitting(true);
             let courseInCart = cart.getItem(course.id);
             if (courseInCart) {
+              setStatus("Already in the cart");
               setShow(true);
               setSubmitting(false);
               return;
@@ -35,6 +38,7 @@ const Actions = ({ cart, course }) => {
               count: 1,
             };
             cart.setItem(course.id, item);
+            setStatus("Added to the cart");
             setShow(true);
             setSubmitting(false);
           }}
@@ -77,16 +81,13 @@ const Actions = ({ cart, course }) => {
                   </Button>
                 </div>
               </Form>
-
-              {show && (
-                <Alert
-                  variant="success"
-                  onClose={() => setShow(false)}
-                  dismissible
-                >
-                  Added to the cart
-                </Alert>
-              )}
+              <DefaultModal
+                show={show}
+                handleHide={() => setShow(false)}
+                handleAccept={() => setShow(false)}
+                bodyText={status}
+                acceptButtonText="Ok"
+              />
             </>
           )}
         </Formik>

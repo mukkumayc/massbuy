@@ -3,6 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 
 const DefaultModal = ({
   show,
+  handleHide,
   handleAccept,
   handleCancel,
   bodyText,
@@ -10,7 +11,17 @@ const DefaultModal = ({
   acceptButtonText,
 }) => {
   return (
-    <Modal show={show} onHide={handleCancel} animation={false}>
+    <Modal
+      show={show}
+      onHide={
+        handleHide ||
+        handleCancel ||
+        (() => {
+          console.error("There is no hide function");
+        })
+      }
+      animation={false}
+    >
       <Modal.Body> {bodyText} </Modal.Body>
       <Modal.Footer>
         {handleCancel && (
