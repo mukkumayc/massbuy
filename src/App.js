@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 import Routes from "./components/routing/Routes";
-import Config from "./config";
 import NavBar from "./components/NavBar";
 import CartWrapper from "./components/CartWrapper";
 import "./App.css";
@@ -21,7 +20,7 @@ function App(props) {
   };
 
   useEffect(() => {
-    fetch(Config.serverUrl + "/checktoken", {
+    fetch(process.env.REACT_APP_SERVER_URL + "/checktoken", {
       credentials: "include",
     })
       .then((res) => {

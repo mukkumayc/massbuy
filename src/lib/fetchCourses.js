@@ -1,8 +1,7 @@
-import Config from "../config";
-
 const fetchCourses = async () => {
+  console.log(process.env.REACT_APP_SERVER_URL);
   let courses = null;
-  await fetch(Config.serverUrl + "/courses")
+  await fetch(process.env.REACT_APP_SERVER_URL + "/courses")
     .then((res) => res.json())
     .then((json) => {
       courses = json.courses;

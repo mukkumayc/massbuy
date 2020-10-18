@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import Config from "../config";
 import { Container, Row, Col, Form } from "react-bootstrap";
 
 class Login extends Component {
@@ -68,7 +67,7 @@ class Login extends Component {
   }
 
   handleSubmit = (values, setSubmitting) => {
-    fetch(Config.serverUrl + "/login", {
+    fetch(process.env.REACT_APP_SERVER_URL + "/login", {
       method: "post",
       headers: {
         "Content-Type": "application/json",
