@@ -6,6 +6,7 @@ import "./CourseItem.css";
 
 const CourseItem = (props) => {
   const {
+    cart,
     title,
     count,
     platforms,
@@ -27,6 +28,10 @@ const CourseItem = (props) => {
             count={courses[index].count}
             setCount={(value) => {
               setFieldValue(`courses[${index}].count`, value);
+              cart.setItem(values.courses[index].id, {
+                ...values.courses[index],
+                count: value,
+              });
             }}
             setDeleting={setDeleting}
           />

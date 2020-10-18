@@ -28,6 +28,7 @@ const CartList = ({ cart, values, handleChange, setFieldValue }) => {
                       handleChange={handleChange}
                       values={values}
                       setFieldValue={setFieldValue}
+                      cart={cart}
                     />
                   );
                 }
