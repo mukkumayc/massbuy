@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, ListGroup, Form } from "react-bootstrap";
-import DefaultModal from "./DefaultModal";
+import DefaultModal from "../DefaultModal";
 import Counter from "./Counter";
 import "./CourseItem.css";
 

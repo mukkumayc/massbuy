@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, ListGroup } from "react-bootstrap";
-import CourseItem from "../CourseItem";
+import CourseItem from "./CourseItem";
 import { FieldArray } from "formik";
 
 const CartList = ({ cart, values, handleChange, setFieldValue }) => {
