@@ -2,7 +2,6 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 
 const BuyCard = ({ values }) => {
-  console.log(values);
   return (
     <Card className="footer-on-small-devices">
       <Card.Body>
@@ -10,10 +9,7 @@ const BuyCard = ({ values }) => {
           <div className="price">
             Total:{" "}
             {values.courses
-              .reduce((acc, c) => {
-                console.log(acc, c);
-                return acc + parseFloat(c.price) * c.count;
-              }, 0)
+              .reduce((acc, c) => acc + parseFloat(c.price) * c.count, 0)
               .toFixed(2)}
           </div>
           <Button type="submit">Buy</Button>

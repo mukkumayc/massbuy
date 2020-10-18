@@ -6,7 +6,6 @@ import BuyCard from "../components/cart/BuyCard";
 import "./Cart.css";
 
 const Cart = ({ cart }) => {
-  console.log("lol what haps");
   return (
     <Container className="cart">
       <Formik
