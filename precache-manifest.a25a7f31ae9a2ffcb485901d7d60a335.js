@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e859d4a9e3195e873e657e4aa729ef42",
+    "revision": "8a9c0a93042bcef2d1a08dc2bccfcf86",
     "url": "/massbuy/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/massbuy/static/css/2.d9ad5f5c.chunk.css"
   },
   {
-    "revision": "5518e182c8eda8944a7d",
+    "revision": "bd08dda3b97ae69246bf",
     "url": "/massbuy/static/css/main.d6e38a34.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/massbuy/static/js/2.e6da5d0d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5518e182c8eda8944a7d",
-    "url": "/massbuy/static/js/main.733a73dd.chunk.js"
+    "revision": "bd08dda3b97ae69246bf",
+    "url": "/massbuy/static/js/main.87ac8e2e.chunk.js"
   },
   {
     "revision": "54b652a7805cdd2d4d24",

@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/massbuy/static/css/main.d6e38a34.chunk.css",
-    "main.js": "/massbuy/static/js/main.733a73dd.chunk.js",
-    "main.js.map": "/massbuy/static/js/main.733a73dd.chunk.js.map",
+    "main.js": "/massbuy/static/js/main.87ac8e2e.chunk.js",
+    "main.js.map": "/massbuy/static/js/main.87ac8e2e.chunk.js.map",
     "runtime-main.js": "/massbuy/static/js/runtime-main.37de7a8c.js",
     "runtime-main.js.map": "/massbuy/static/js/runtime-main.37de7a8c.js.map",
     "static/css/2.d9ad5f5c.chunk.css": "/massbuy/static/css/2.d9ad5f5c.chunk.css",
     "static/js/2.e6da5d0d.chunk.js": "/massbuy/static/js/2.e6da5d0d.chunk.js",
     "static/js/2.e6da5d0d.chunk.js.map": "/massbuy/static/js/2.e6da5d0d.chunk.js.map",
     "index.html": "/massbuy/index.html",
-    "precache-manifest.ed52f2e5c97e02595c66779c2a1a5427.js": "/massbuy/precache-manifest.ed52f2e5c97e02595c66779c2a1a5427.js",
+    "precache-manifest.a25a7f31ae9a2ffcb485901d7d60a335.js": "/massbuy/precache-manifest.a25a7f31ae9a2ffcb485901d7d60a335.js",
     "service-worker.js": "/massbuy/service-worker.js",
     "static/css/2.d9ad5f5c.chunk.css.map": "/massbuy/static/css/2.d9ad5f5c.chunk.css.map",
     "static/css/main.d6e38a34.chunk.css.map": "/massbuy/static/css/main.d6e38a34.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.d9ad5f5c.chunk.css",
     "static/js/2.e6da5d0d.chunk.js",
     "static/css/main.d6e38a34.chunk.css",
-    "static/js/main.733a73dd.chunk.js"
+    "static/js/main.87ac8e2e.chunk.js"
   ]
 }
