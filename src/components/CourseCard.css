@@ -1,0 +1,21 @@
+.card.course-card {
+  width: 300px;
+  margin: 0.2em;
+  height: 50%;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+.card.course-card .card-img-bottom {
+  object-fit: cover;
+  height: 25%;
+}
+
+@media (max-width: 576px) {
+  .card.course-card {
+    width: 100%;
+  }
+}
+
+.card.course-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}

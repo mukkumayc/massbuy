@@ -12,3 +12,12 @@
     width: 100% !important;
   }
 }
+
+.container.page,.container-fluid.page {
+  margin-top: 2em;
+}
+
+.main-card {
+  width: 100%;
+  max-width: 576px;
+}
