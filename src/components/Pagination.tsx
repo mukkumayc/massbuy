@@ -1,14 +1,19 @@
 import React from "react";
 import Pagination from "react-bootstrap/Pagination";
-import { LinkContainer } from "react-router-bootstrap";
+import { useRouter } from "next/router";
 
 const createItems = (pagesNum: number) => {
+  const router = useRouter();
   const locationSearch = new URLSearchParams(window.location.search);
-  let publicUrlPathname;
+  let publicUrlPathname = "";
   try {
-    publicUrlPathname = new URL(process.env.PUBLIC_URL).pathname;
+    if (process.env.PUBLIC_URL) {
+      publicUrlPathname = new URL(process.env.PUBLIC_URL).pathname;
+    }
   } catch (err) {
-    publicUrlPathname = process.env.PUBLIC_URL;
+    if (process.env.PUBLIC_URL) {
+      publicUrlPathname = process.env.PUBLIC_URL;
+    }
   }
   const items = [];
   if (pagesNum < 100) {
@@ -18,9 +23,14 @@ const createItems = (pagesNum: number) => {
         ? window.location.pathname.substr(publicUrlPathname.length)
         : window.location.pathname;
       items.push(
-        <LinkContainer key={n} to={`${pathname}?${locationSearch.toString()}`}>
+        <a
+          key={n}
+          onClick={() =>
+            router.push(`${pathname}?${locationSearch.toString()}`)
+          }
+        >
           <Pagination.Item>{n}</Pagination.Item>
-        </LinkContainer>
+        </a>
       );
     }
   }

@@ -3,7 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userIdSlice = createSlice({
   name: "userId",
   initialState: {
-    value: parseInt(window.localStorage.getItem("userId") || ""),
+    value: parseInt(
+      (typeof window !== "undefined" &&
+        window.localStorage.getItem("userId")) ||
+        ""
+    ),
   } as { value: number },
   reducers: {
     set: (state, { payload }: { payload: number }) => {

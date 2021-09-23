@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Actions from "./course/Actions";
 import About from "./course/About";
-import "./Course.css";
 import { ICourse } from "../../types";
 import requestsWrapper from "../../requestsWrapper";
 

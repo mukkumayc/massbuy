@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { withRouter } from "react-router";
-import Routes from "./components/routing/Routes";
-import NavBar from "./components/NavBar";
-import "./App.css";
-import { IAppProps, ICourse } from "./types";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import requestsWrapper from "./requestsWrapper";
-import { RootState } from "./store";
-import MessageModal from "./components/MessageModal";
+import requestsWrapper from "../requestsWrapper";
+import { RootState } from "../store";
+import { IPageProps, ICourse } from "../types";
+import MessageModal from "./MessageModal";
+import NavBar from "./NavBar";
 
-function App() {
+interface AuthCheckerProps {
+  children?: React.ReactNode;
+}
+
+const AuthChecker = ({ children }: AuthCheckerProps) => {
   const [authenticated, setAuthenticated] = useState(false);
   const [isAuthenticating, setAuthenticating] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
   const [courses, setCourses] = useState<ICourse[]>([]);
-  const appProps: IAppProps = {
+  const pageProps: IPageProps = {
     authenticated,
     setAuthenticated,
     isAdmin,
@@ -26,7 +27,6 @@ function App() {
   const messageModalProps = useSelector(
     (state: RootState) => state.messageModal.value
   );
-
   useEffect(() => {
     if (Number.isNaN(userId)) {
       setAuthenticating(false);
@@ -49,13 +49,17 @@ function App() {
     <div className="App">
       {!isAuthenticating && (
         <>
-          <NavBar {...appProps} />
-          <Routes appProps={appProps} />
+          <NavBar {...pageProps} />
+          {React.Children.map(children, (child) =>
+            React.isValidElement(child)
+              ? React.cloneElement(child, { pageProps })
+              : child
+          )}
           <MessageModal {...messageModalProps} />
         </>
       )}
     </div>
   );
-}
+};
 
-export default withRouter(App);
+export default AuthChecker;

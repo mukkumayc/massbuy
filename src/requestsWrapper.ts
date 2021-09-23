@@ -1,5 +1,5 @@
 if (
-  process.env.REACT_APP_SERVER_URL === undefined &&
+  process.env.NEXT_PUBLIC_SERVER_URL === undefined &&
   !process.env.REACT_APP_DEBUG_NO_SERVER
 ) {
   throw new Error("Not a non-server mode, but url not provided");
@@ -63,7 +63,7 @@ class RequestsWrapper {
   async get(path: string) {
     if (process.env.REACT_APP_DEBUG_NO_SERVER) {
       console.log(
-        `GET ${process.env.REACT_APP_SERVER_URL}${path}\n${this.swaggerhub}${path}`
+        `GET ${process.env.NEXT_PUBLIC_SERVER_URL}${path}\n${this.swaggerhub}${path}`
       );
       if (path.includes("user_courses")) {
         return [
@@ -80,24 +80,24 @@ class RequestsWrapper {
       }
       return await this._get(this.swaggerhub, path);
     }
-    if (process.env.REACT_APP_SERVER_URL === undefined) {
+    if (process.env.NEXT_PUBLIC_SERVER_URL === undefined) {
       throw new Error("Not a no-server mode, but url not provided");
     }
-    return await this._get(process.env.REACT_APP_SERVER_URL, path);
+    return await this._get(process.env.NEXT_PUBLIC_SERVER_URL, path);
   }
   async post(path: string, body?: object) {
     if (process.env.REACT_APP_DEBUG_NO_SERVER) {
       console.log(
         `POST ${
-          process.env.REACT_APP_SERVER_URL
+          process.env.NEXT_PUBLIC_SERVER_URL
         }${path}\nbody:\n${JSON.stringify(body, null, 2)}`
       );
       return await this._post(this.swaggerhub, path, body);
     }
-    if (process.env.REACT_APP_SERVER_URL === undefined) {
+    if (process.env.NEXT_PUBLIC_SERVER_URL === undefined) {
       throw new Error("Not a no-server mode, but url not provided");
     }
-    return await this._post(process.env.REACT_APP_SERVER_URL, path, body);
+    return await this._post(process.env.NEXT_PUBLIC_SERVER_URL, path, body);
   }
 }
 

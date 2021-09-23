@@ -2,7 +2,6 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import CartList from "../components/cart/CartList";
 import PayCard from "../components/cart/PayCard";
-import "./Cart.css";
 import { ICourse } from "../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";

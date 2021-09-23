@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import { ICourse } from "../../types";
 import DefaultModal from "../DefaultModal";
-import "./CourseItem.css";
 
 interface CourseItemProps {
   course: ICourse;

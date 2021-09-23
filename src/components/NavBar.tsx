@@ -1,11 +1,11 @@
 import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { RouteComponentProps, withRouter, NavLink } from "react-router-dom";
 import { RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { remove as removeUserId } from "../slices/userIdSlice";
+import { useRouter } from "next/router";
 
-interface NavBarProps extends RouteComponentProps<any> {
+interface NavBarProps {
   authenticated: boolean;
   setAuthenticated(_b: boolean): void;
   isAdmin: boolean;
@@ -18,11 +18,12 @@ interface NavBarProps extends RouteComponentProps<any> {
 // })
 
 const NavBar = (props: NavBarProps) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.userId.value);
   return (
     <Navbar bg="light" expand="lg">
-      <Navbar.Brand to="/courses/all" as={NavLink}>
+      <Navbar.Brand onClick={() => router.push("/courses/all")}>
         Massbuy
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
@@ -30,30 +31,27 @@ const NavBar = (props: NavBarProps) => {
         <Nav className="mr-auto" variant="tabs">
           {props.authenticated ? (
             <>
-              <Nav.Link to="/cart" as={NavLink}>
-                Cart
-              </Nav.Link>
+              <Nav.Link onClick={() => router.push("/cart")}>Cart</Nav.Link>
               {props.isAdmin && (
-                <Nav.Link to="/users/all" as={NavLink}>
+                <Nav.Link onClick={() => router.push("/users/all")}>
                   All users
                 </Nav.Link>
               )}
               <NavDropdown title="Courses" id="courses-nav-dropdown">
-                <NavDropdown.Item to="/courses/all" as={NavLink}>
+                <NavDropdown.Item onClick={() => router.push("/courses/all")}>
                   List all
                 </NavDropdown.Item>
                 {props.isAdmin && (
-                  <NavDropdown.Item to="/courses/create" as={NavLink}>
+                  <NavDropdown.Item
+                    onClick={() => router.push("/courses/create")}
+                  >
                     Create
                   </NavDropdown.Item>
                 )}
                 {userId === null ? (
                   "Loading..."
                 ) : (
-                  <NavDropdown.Item
-                    to={`/courses/user_courses/${userId}`}
-                    as={NavLink}
-                  >
+                  <NavDropdown.Item to={`/courses/user_courses/${userId}`}>
                     My courses
                   </NavDropdown.Item>
                 )}
@@ -69,14 +67,14 @@ const NavBar = (props: NavBarProps) => {
             </>
           ) : (
             <>
-              <Nav.Link to="/login" as={NavLink}>
-                Login
-              </Nav.Link>
+              <Nav.Link onClick={() => router.push("/login")}>Login</Nav.Link>
               <NavDropdown title="Register" id="register-nav-dropdown">
-                <NavDropdown.Item to="/register/user" as={NavLink}>
+                <NavDropdown.Item onClick={() => router.push("/register/user")}>
                   As default user
                 </NavDropdown.Item>
-                <NavDropdown.Item to="/register/student" as={NavLink}>
+                <NavDropdown.Item
+                  onClick={() => router.push("/register/student")}
+                >
                   As student
                 </NavDropdown.Item>
               </NavDropdown>
@@ -99,4 +97,4 @@ const NavBar = (props: NavBarProps) => {
   );
 };
 
-export default withRouter(NavBar);
+export default NavBar;

@@ -2,7 +2,6 @@ import React from "react";
 import { Button, Form } from "react-bootstrap";
 import { Formik, Form as FForm } from "formik";
 import * as Yup from "yup";
-import "./SearchBar.css";
 import { ICourse } from "../types";
 
 interface SearchBarProps {

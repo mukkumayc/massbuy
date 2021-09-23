@@ -10,7 +10,7 @@ export interface ICourse {
 
 export type CartCourse = Omit<ICourse, "description">;
 
-export interface IAppProps {
+export interface IPageProps {
   authenticated: boolean;
   setAuthenticated(_b: boolean): void;
   isAdmin: boolean;

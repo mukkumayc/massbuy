@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import DefaultModal from "../../../components/DefaultModal";
-import "./Actions.css";
 import { ICourse } from "../../../types";
-import { RouteComponentProps, withRouter } from "react-router";
 import requestsWrapper from "../../../requestsWrapper";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
-interface ActionsProps extends RouteComponentProps {
+interface ActionsProps {
   course: ICourse;
 }
 
@@ -67,4 +65,4 @@ const Actions = ({ course, history }: ActionsProps) => {
   );
 };
 
-export default withRouter(Actions);
+export default Actions;
