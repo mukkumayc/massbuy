@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { useParams } from "react-router";
 import requestsWrapper from "../../requestsWrapper";
 import { ICourse } from "../../types";
 import CoursesList from "./CoursesList";
+import { useRouter } from "next/router";
 
 function UserCourses() {
-  const { userId } = useParams<{ userId: string }>();
+  const router = useRouter();
+  const { userId } = router.query;
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState<ICourse[] | null>(null);
 

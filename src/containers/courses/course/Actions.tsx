@@ -4,17 +4,19 @@ import DefaultModal from "../../../components/DefaultModal";
 import { ICourse } from "../../../types";
 import requestsWrapper from "../../../requestsWrapper";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import { RootState } from "../../../store";
 
 interface ActionsProps {
   course: ICourse;
 }
 
-const Actions = ({ course, history }: ActionsProps) => {
+const Actions = ({ course }: ActionsProps) => {
   const [show, setShow] = useState(false); // showing alert about successful adding to cart
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const userId = useSelector((state: RootState) => state.userId.value);
+  const router = useRouter();
 
   return (
     <Card className="actions footer-on-small-devices">
@@ -46,7 +48,7 @@ const Actions = ({ course, history }: ActionsProps) => {
             variant="warning"
             onClick={() => {
               setSubmitting(true);
-              history.push(`/courses/update/${course.course_id}`);
+              router.push(`/courses/update/${course.course_id}`);
               setSubmitting(false);
             }}
           >

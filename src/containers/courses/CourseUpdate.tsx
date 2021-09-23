@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Form as BForm } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import requestsWrapper from "../../requestsWrapper";
-import { RouteComponentProps, useParams, withRouter } from "react-router";
 import { IUser } from "../../types";
 import { useDispatch } from "react-redux";
 import { show } from "../../slices/messageModalSlice";
+import { useRouter } from "next/router";
 
-interface CourseUpdateProps extends RouteComponentProps {}
+interface CourseUpdateProps {}
 
 function CourseUpdate(props: CourseUpdateProps) {
+  const router = useRouter();
   const [course, setCourse] = useState<IUser | null>(null);
   const [deleting, setDeleting] = useState(false);
-  const { courseId } = useParams<{ courseId: string }>();
+  const { courseId } = router.query;
   const dispatch = useDispatch();
   useEffect(() => {
     requestsWrapper
@@ -114,7 +115,7 @@ function CourseUpdate(props: CourseUpdateProps) {
                           .then(() => {
                             alert("Deleted");
                             setDeleting(false);
-                            props.history.push("/courses/all");
+                            router.push("/courses/all");
                           });
                       }}
                     >
@@ -133,4 +134,4 @@ function CourseUpdate(props: CourseUpdateProps) {
   );
 }
 
-export default withRouter(CourseUpdate);
+export default CourseUpdate;
