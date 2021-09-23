@@ -24,7 +24,7 @@ const Course = () => {
   }, []);
 
   return (
-    <Container className="course">
+    <Container className="course page">
       {!isLoading && (
         <Row>
           <Col sm="8">{course ? <About course={course} /> : "Loading..."}</Col>

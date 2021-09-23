@@ -24,7 +24,7 @@ const Courses = ({ courses, setCourses }: CoursesProps) => {
   }, [setCourses]);
 
   return (
-    <Container className="home" fluid>
+    <Container className="home page">
       {!isLoading && <CoursesList courses={courses} />}
     </Container>
   );

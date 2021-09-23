@@ -1,13 +1,12 @@
 .card.course-card {
   width: 300px;
   margin: 0.2em;
-  height: 50%;
+  height: auto;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 }
 
 .card.course-card .card-img-bottom {
-  object-fit: cover;
-  height: 25%;
+  object-fit: contain;
 }
 
 @media (max-width: 576px) {

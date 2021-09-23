@@ -39,7 +39,7 @@ const RegisterStudent = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
   };
 
   return (
-    <Container className="login page" fluid>
+    <Container className="login page">
       <Row className="justify-content-center">
         <Col sm={10} md={8} lg={4}>
           <Formik
@@ -59,7 +59,7 @@ const RegisterStudent = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
           >
             {({ isSubmitting, handleChange }) => (
               <Form>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="register-email">Email</BForm.Label>
                   <BForm.Control
                     type="email"
@@ -68,7 +68,7 @@ const RegisterStudent = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
                     onChange={handleChange}
                   />
                 </BForm.Group>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="register-password">
                     Password
                   </BForm.Label>

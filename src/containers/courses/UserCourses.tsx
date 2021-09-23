@@ -19,7 +19,7 @@ function UserCourses() {
       .finally(() => setLoading(false));
   }, [userId]);
   return (
-    <Container className="user-courses">
+    <Container className="user-courses page">
       <h2>User courses</h2>
       {!loading ? (
         courses ? (

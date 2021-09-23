@@ -45,7 +45,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
   };
 
   return (
-    <Container className="login page" fluid>
+    <Container className="login page">
       <Row className="justify-content-center">
         <Col sm={10} md={8} lg={4}>
           <Formik
@@ -68,7 +68,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
           >
             {({ isSubmitting, handleChange }) => (
               <Form>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="register-email">Email</BForm.Label>
                   <BForm.Control
                     type="email"
@@ -77,7 +77,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
                     onChange={handleChange}
                   />
                 </BForm.Group>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="register-name">Name</BForm.Label>
                   <BForm.Control
                     type="text"
@@ -86,7 +86,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
                     onChange={handleChange}
                   />
                 </BForm.Group>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="register-surname">Surname</BForm.Label>
                   <BForm.Control
                     type="text"
@@ -95,7 +95,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
                     onChange={handleChange}
                   />
                 </BForm.Group>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="register-patronymic">
                     Patronymic
                   </BForm.Label>
@@ -106,7 +106,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
                     onChange={handleChange}
                   />
                 </BForm.Group>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="register-password">
                     Password
                   </BForm.Label>

@@ -14,7 +14,7 @@ const CoursesList = ({ courses }: CoursesProps) => {
     new URLSearchParams(window.location.search).get("page") || "1"
   );
   return (
-    <Container className="courses" fluid>
+    <Container className="courses">
       <Row className="justify-content-center">
         <Pagination
           pagesNum={Math.ceil(courses?.length / Config.coursesOnOnePage)}

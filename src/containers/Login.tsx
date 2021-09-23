@@ -34,7 +34,7 @@ const Login = ({ setAuthenticated, setIsAdmin }: LoginProps) => {
   };
 
   return (
-    <Container className="login page" fluid>
+    <Container className="login page">
       <Row className="justify-content-center">
         <Col sm={10} md={8} lg={4}>
           <Formik
@@ -51,7 +51,7 @@ const Login = ({ setAuthenticated, setIsAdmin }: LoginProps) => {
           >
             {({ isSubmitting, handleChange }) => (
               <Form>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="login-email">Email</BForm.Label>
                   <BForm.Control
                     type="email"
@@ -60,7 +60,7 @@ const Login = ({ setAuthenticated, setIsAdmin }: LoginProps) => {
                     onChange={handleChange}
                   />
                 </BForm.Group>
-                <BForm.Group>
+                <BForm.Group className="mb-3">
                   <BForm.Label htmlFor="login-password">Password</BForm.Label>
                   <BForm.Control
                     type="password"

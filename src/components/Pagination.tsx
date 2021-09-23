@@ -1,6 +1,7 @@
 import React from "react";
 import Pagination from "react-bootstrap/Pagination";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const createItems = (pagesNum: number) => {
   const router = useRouter();
@@ -23,14 +24,9 @@ const createItems = (pagesNum: number) => {
         ? window.location.pathname.substr(publicUrlPathname.length)
         : window.location.pathname;
       items.push(
-        <a
-          key={n}
-          onClick={() =>
-            router.push(`${pathname}?${locationSearch.toString()}`)
-          }
-        >
+        <Link key={n} href={`${pathname}?${locationSearch.toString()}`}>
           <Pagination.Item>{n}</Pagination.Item>
-        </a>
+        </Link>
       );
     }
   }
@@ -42,7 +38,11 @@ interface CustomPaginationProps {
 }
 
 const CustomPagination = ({ pagesNum }: CustomPaginationProps) => {
-  return <Pagination>{createItems(pagesNum)}</Pagination>;
+  return (
+    <Pagination className="d-flex justify-content-center">
+      {createItems(pagesNum)}
+    </Pagination>
+  );
 };
 
 export default CustomPagination;

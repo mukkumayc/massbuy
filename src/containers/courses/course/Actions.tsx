@@ -21,7 +21,7 @@ const Actions = ({ course }: ActionsProps) => {
   return (
     <Card className="actions footer-on-small-devices">
       <Card.Body>
-        <div className="d-flex justify-content-between">
+        <div className="d-flex justify-content-between mb-3">
           <Button
             disabled={submitting}
             onClick={async () => {
@@ -55,6 +55,7 @@ const Actions = ({ course }: ActionsProps) => {
             Edit
           </Button>
         </div>
+        <a href={course.course_link}>To the course page on platform</a>
         <DefaultModal
           show={show}
           handleHide={() => setShow(false)}

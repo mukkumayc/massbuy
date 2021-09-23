@@ -41,7 +41,7 @@ const Cart = () => {
 
   useEffect(fetchCourses, []);
   return (
-    <Container className="cart">
+    <Container className="cart page">
       {fetching ? (
         "Loading..."
       ) : cart ? (
