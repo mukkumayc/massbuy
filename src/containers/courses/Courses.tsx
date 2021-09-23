@@ -6,7 +6,7 @@ import { ICourse } from "../../types";
 
 interface CoursesProps {
   courses: ICourse[];
-  setCourses(c: ICourse[]): void;
+  setCourses(_c: ICourse[]): void;
 }
 
 const Courses = ({ courses, setCourses }: CoursesProps) => {

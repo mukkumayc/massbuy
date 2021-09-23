@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
-import { Formik } from "formik";
-import * as Yup from "yup";
 import DefaultModal from "../../../components/DefaultModal";
 import "./Actions.css";
-import CartWrapper from "../../../components/CartWrapper";
 import { ICourse } from "../../../types";
 import { RouteComponentProps, withRouter } from "react-router";
 import requestsWrapper from "../../../requestsWrapper";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../../store";
 
 interface ActionsProps extends RouteComponentProps {
-  cart: CartWrapper;
   course: ICourse;
 }
 
-const Actions = ({ cart, course, history }: ActionsProps) => {
+const Actions = ({ course, history }: ActionsProps) => {
   const [show, setShow] = useState(false); // showing alert about successful adding to cart
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -30,7 +26,6 @@ const Actions = ({ cart, course, history }: ActionsProps) => {
             disabled={submitting}
             onClick={async () => {
               setSubmitting(true);
-              const { description, ...item } = course;
               await requestsWrapper
                 .post(
                   `/api/baskets/add_course_to_basket/${userId}/${course.course_id}`
@@ -44,7 +39,6 @@ const Actions = ({ cart, course, history }: ActionsProps) => {
                   setShow(true);
                 })
                 .finally(() => setSubmitting(false));
-              // cart.setItem(course.course_id, item);
             }}
           >
             Add to cart
@@ -54,8 +48,6 @@ const Actions = ({ cart, course, history }: ActionsProps) => {
             variant="warning"
             onClick={() => {
               setSubmitting(true);
-              const { description, ...item } = course;
-              cart.setItem(course.course_id, item);
               history.push(`/courses/update/${course.course_id}`);
               setSubmitting(false);
             }}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Button, ListGroup, Form } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 import { ICourse } from "../../types";
-import CartWrapper from "../CartWrapper";
 import DefaultModal from "../DefaultModal";
 import "./CourseItem.css";
 

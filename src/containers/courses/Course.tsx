@@ -3,19 +3,15 @@ import { Container, Row, Col } from "react-bootstrap";
 import Actions from "./course/Actions";
 import About from "./course/About";
 import "./Course.css";
-import CartWrapper from "../../components/CartWrapper";
 import { ICourse } from "../../types";
 import requestsWrapper from "../../requestsWrapper";
 
-interface CourseProps {
-  cart: CartWrapper;
-}
-const Course = ({ cart }: CourseProps) => {
+const Course = () => {
   const [isLoading, setLoading] = useState(true); // loading info about course
   const [course, setCourse] = useState<ICourse | null>(null); // information about current course
 
   useEffect(() => {
-    let id = window.location.pathname.split("/").pop() || "1";
+    const id = window.location.pathname.split("/").pop() || "1";
     requestsWrapper
       .get(`/api/courses/${id}`)
       .then((course) => {
@@ -34,7 +30,7 @@ const Course = ({ cart }: CourseProps) => {
         <Row>
           <Col sm="8">{course ? <About course={course} /> : "Loading..."}</Col>
           <Col sm="4">
-            {course ? <Actions course={course} cart={cart} /> : "Loading..."}
+            {course ? <Actions course={course} /> : "Loading..."}
           </Col>
         </Row>
       )}

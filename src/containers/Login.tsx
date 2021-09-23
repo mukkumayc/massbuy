@@ -7,8 +7,8 @@ import { set as setUserId } from "../slices/userIdSlice";
 import { useDispatch } from "react-redux";
 
 interface LoginProps {
-  setAuthenticated(b: boolean): void;
-  setIsAdmin(b: boolean): void;
+  setAuthenticated(_b: boolean): void;
+  setIsAdmin(_b: boolean): void;
 }
 
 const Login = ({ setAuthenticated, setIsAdmin }: LoginProps) => {
@@ -17,7 +17,7 @@ const Login = ({ setAuthenticated, setIsAdmin }: LoginProps) => {
 
   const handleSubmit = (
     { email, password }: { email: string; password: string },
-    setSubmitting: (b: boolean) => void
+    setSubmitting: (_b: boolean) => void
   ) => {
     requestsWrapper
       .post("/api/users/login", { email, password })

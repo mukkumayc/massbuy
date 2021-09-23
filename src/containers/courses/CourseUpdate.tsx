@@ -34,7 +34,7 @@ function CourseUpdate(props: CourseUpdateProps) {
                 setSubmitting(true);
                 requestsWrapper
                   .post(`/api/courses/update/${courseId}`, course)
-                  .then((json) =>
+                  .then(() =>
                     dispatch(
                       show({
                         header: "Success",

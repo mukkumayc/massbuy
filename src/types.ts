@@ -1,6 +1,3 @@
-import { boolean, number } from "yup";
-import CartWrapper from "./components/CartWrapper";
-
 export interface ICourse {
   course_id: number;
   name: string;
@@ -15,12 +12,11 @@ export type CartCourse = Omit<ICourse, "description">;
 
 export interface IAppProps {
   authenticated: boolean;
-  setAuthenticated(b: boolean): void;
+  setAuthenticated(_b: boolean): void;
   isAdmin: boolean;
-  setIsAdmin(b: boolean): void;
-  cart: CartWrapper;
+  setIsAdmin(_b: boolean): void;
   courses: ICourse[];
-  setCourses(b: ICourse[]): void;
+  setCourses(_b: ICourse[]): void;
 }
 
 export interface IUser {

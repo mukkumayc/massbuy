@@ -3,8 +3,8 @@ import { Button } from "react-bootstrap";
 
 interface CounterProps {
   count: number;
-  setCount(n: number): void;
-  setDeleting(b: boolean): void;
+  setCount(_n: number): void;
+  setDeleting(_b: boolean): void;
 }
 
 const Counter = ({ count, setCount, setDeleting }: CounterProps) => {

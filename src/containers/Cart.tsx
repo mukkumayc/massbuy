@@ -8,10 +8,6 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import requestsWrapper from "../requestsWrapper";
 
-// interface CartProps {
-//   cart: CartWrapper;
-// }
-
 interface Cart {
   courses: ICourse[];
   total_price: number;
@@ -23,25 +19,26 @@ const Cart = () => {
     total_price: number;
   } | null>(null);
   const [fetching, setFetching] = useState(true);
-  const [loading, setLoading] = useState(false);
   const userId = useSelector((state: RootState) => state.userId.value);
 
   const fetchCourses = useCallback(() => {
+    setFetching(true);
     requestsWrapper
       .get(`/api/baskets/${userId}`)
       .then((c) => setCart(c))
       .catch(console.log)
       .finally(() => setFetching(false));
-  }, []);
+  }, [userId]);
 
-  const deleteCourse = useCallback((courseId: number) => {
-    setLoading(true);
-    requestsWrapper
-      .post(`/api/baskets/delete_course_from_basket/${userId}/${courseId}`)
-      .then(fetchCourses)
-      .catch(console.error)
-      .finally(() => setLoading(false));
-  }, []);
+  const deleteCourse = useCallback(
+    (courseId: number) => {
+      requestsWrapper
+        .post(`/api/baskets/delete_course_from_basket/${userId}/${courseId}`)
+        .then(fetchCourses)
+        .catch(console.error);
+    },
+    [userId, fetchCourses]
+  );
 
   useEffect(fetchCourses, []);
   return (

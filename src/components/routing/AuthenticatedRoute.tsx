@@ -3,7 +3,7 @@ import { Route, Redirect, RouteProps } from "react-router-dom";
 import { IAppProps } from "../../types";
 
 interface AuthenticatedRouteProps extends RouteProps {
-  component(props: any): JSX.Element;
+  component(_props: any): JSX.Element;
   appProps: IAppProps;
 }
 

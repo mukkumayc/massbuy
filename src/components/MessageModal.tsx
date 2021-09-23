@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { hide, MessageModalProps } from "../slices/messageModalSlice";
 
-const DefaultModal = ({ show, header, message }: MessageModalProps) => {
+const MessageModal = ({ show, header, message }: MessageModalProps) => {
   const dispatch = useDispatch();
   return (
     <Modal show={show} onHide={() => dispatch(hide())} animation={false}>
@@ -18,4 +18,4 @@ const DefaultModal = ({ show, header, message }: MessageModalProps) => {
   );
 };
 
-export default DefaultModal;
+export default MessageModal;

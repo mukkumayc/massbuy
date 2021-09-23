@@ -1,31 +1,8 @@
-// type getPath =
-//   | "/api/users/all"
-//   | `/api​/users​/${number}`
-//   | "/api/courses/all"
-//   | `/api​/courses​/${number}`
-//   | `/api/baskets/${number}`;
-
-// type postPath =
-//   | "/api/users/auth"
-//   | "/api/users/register/user"
-//   | "/api/users/register/student"
-//   | "/api/courses/create"
-//   | `/api/courses/update/${number}`
-//   | `/api/courses/delete/${number}`
-//   | `/api/courses/user_courses/${number}`
-//   | `/api/courses/add_user_to_course/${number}/${number}`
-//   | `/api/courses/delete_user_from_course/${number}/${number}`
-//   | `/api/baskets/add_course_to_basket/${number}/${number}`
-//   | `/api/baskets/delete_course_from_basket/${number}/${number}`
-//   | `/api/baskets/delete_all_courses_from_basket/${number}`
-//   | `/api/orders/payment/${number}`
-//   | `/api/orders/check/${number}/${number}`;
-
 if (
-  !process.env.REACT_APP_SERVER_URL === undefined &&
+  process.env.REACT_APP_SERVER_URL === undefined &&
   !process.env.REACT_APP_DEBUG_NO_SERVER
 ) {
-  throw new Error("Not a no-server mode, but url not provided");
+  throw new Error("Not a non-server mode, but url not provided");
 }
 
 class RequestsWrapper {
@@ -67,7 +44,12 @@ class RequestsWrapper {
             throw new Error(txt);
           });
         } else {
-          return res.json();
+          console.log(res.headers.get("Content-Type"));
+          if (res.headers.get("Content-Type") === "application/json") {
+            return res.json();
+          } else {
+            return res.text();
+          }
         }
       })
       .catch((err) => {

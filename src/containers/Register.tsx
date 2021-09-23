@@ -7,8 +7,8 @@ import { set as setUserId } from "../slices/userIdSlice";
 import { useDispatch } from "react-redux";
 
 interface RegisterProps {
-  setAuthenticated(b: boolean): void;
-  setIsAdmin(b: boolean): void;
+  setAuthenticated(_b: boolean): void;
+  setIsAdmin(_b: boolean): void;
 }
 
 const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
@@ -23,7 +23,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
       patronymic: string;
       password: string;
     },
-    setSubmitting: (b: boolean) => void
+    setSubmitting: (_b: boolean) => void
   ) => {
     const { email, password } = values;
     requestsWrapper

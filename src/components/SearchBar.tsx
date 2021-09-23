@@ -6,7 +6,7 @@ import "./SearchBar.css";
 import { ICourse } from "../types";
 
 interface SearchBarProps {
-  search: (q: string) => Promise<ICourse[] | null>;
+  search: (_q: string) => Promise<ICourse[] | null>;
 }
 
 const SearchBar = ({ search }: SearchBarProps) => {
@@ -28,7 +28,7 @@ const SearchBar = ({ search }: SearchBarProps) => {
         });
       }}
     >
-      {({ handleChange, handleSubmit, isSubmitting, values }) => (
+      {({ handleChange, isSubmitting, values }) => (
         <Form as={FForm} inline className="search-bar">
           <div
             className="d-flex search-wrapper"

@@ -1,12 +1,11 @@
 import React from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import CourseItem from "./CourseItem";
-import CartWrapper from "../CartWrapper";
-import { CartCourse, ICourse } from "../../types";
+import { ICourse } from "../../types";
 
 interface CartListProps {
   courses: ICourse[];
-  deleteCourse(id: number): void;
+  deleteCourse(_id: number): void;
 }
 
 const CartList = ({ courses, deleteCourse }: CartListProps) => {

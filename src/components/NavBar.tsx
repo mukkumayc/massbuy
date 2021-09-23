@@ -2,13 +2,12 @@ import React from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { RouteComponentProps, withRouter, NavLink } from "react-router-dom";
 import { RootState } from "../store";
-import SearchBar from "./SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import { remove as removeUserId } from "../slices/userIdSlice";
 
 interface NavBarProps extends RouteComponentProps<any> {
   authenticated: boolean;
-  setAuthenticated(b: boolean): void;
+  setAuthenticated(_b: boolean): void;
   isAdmin: boolean;
 }
 
@@ -84,7 +83,7 @@ const NavBar = (props: NavBarProps) => {
             </>
           )}
         </Nav>
-        {!window.location.pathname.includes("/search") && (
+        {/* {!window.location.pathname.includes("/search") && (
           <SearchBar
             {...props}
             search={(term) =>
@@ -94,7 +93,7 @@ const NavBar = (props: NavBarProps) => {
               })
             }
           />
-        )}
+        )} */}
       </Navbar.Collapse>
     </Navbar>
   );

@@ -3,7 +3,7 @@ import { CartCourse } from "../types";
 class CartWrapper {
   cart: Map<number, CartCourse>;
   constructor() {
-    let tmp = localStorage.getItem("cart");
+    const tmp = localStorage.getItem("cart");
     this.cart = tmp ? new Map(JSON.parse(tmp)) : new Map();
   }
   save() {
@@ -17,7 +17,7 @@ class CartWrapper {
     return this.cart.get(key);
   }
   removeItem(key: number) {
-    let res = this.cart.delete(key);
+    const res = this.cart.delete(key);
     this.save();
     return res;
   }

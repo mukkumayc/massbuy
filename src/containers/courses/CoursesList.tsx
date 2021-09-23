@@ -10,7 +10,7 @@ interface CoursesProps {
 }
 
 const CoursesList = ({ courses }: CoursesProps) => {
-  let page = parseInt(
+  const page = parseInt(
     new URLSearchParams(window.location.search).get("page") || "1"
   );
   return (

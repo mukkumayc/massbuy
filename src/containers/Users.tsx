@@ -3,9 +3,9 @@ import { Container, Table } from "react-bootstrap";
 import requestsWrapper from "../requestsWrapper";
 import { IUser } from "../types";
 
-interface UsersProps {}
+// interface UsersProps {}
 
-export default function Users(props: UsersProps) {
+export default function Users() {
   const [users, setUsers] = useState<IUser[] | null>(null);
 
   useEffect(() => {

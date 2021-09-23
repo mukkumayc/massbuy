@@ -9,7 +9,7 @@ import { RouteComponentProps } from "react-router-dom";
 
 interface SearchProps extends RouteComponentProps<any> {
   courses: ICourse[];
-  setCourses(c: ICourse[]): void;
+  setCourses(_c: ICourse[]): void;
 }
 
 const Search = ({ history, courses, setCourses }: SearchProps) => {
@@ -28,7 +28,7 @@ const Search = ({ history, courses, setCourses }: SearchProps) => {
         c = await fetchCourses();
         setCourses(c);
       }
-      let res = c?.filter((course) => course.name.includes(term));
+      const res = c?.filter((course) => course.name.includes(term));
       setResult(res);
       setLoading(false);
       return res;
