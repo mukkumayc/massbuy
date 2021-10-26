@@ -20,7 +20,12 @@ async function _fetch<A>(
   const res = await fetch(url, {
     method,
     credentials: "include",
-    ...(body ? { body, headers: { "Content-Type": "application/json" } } : {}),
+    ...(body
+      ? {
+          body: JSON.stringify(body),
+          headers: { "Content-Type": "application/json" },
+        }
+      : {}),
   });
 
   if (!res.ok) {
@@ -44,39 +49,6 @@ async function _fetch<A>(
 }
 
 class RequestsWrapper {
-  async _fetch<A>(
-    url: string,
-    method: "get" | "post",
-    validator: t.Decoder<unknown, A>,
-    body?: any
-  ): Promise<Either<string, A>> {
-    const res = await fetch(url, {
-      method,
-      credentials: "include",
-      ...(body
-        ? {
-            body: JSON.stringify(body),
-            headers: { "Content-Type": "application/json" },
-          }
-        : {}),
-    });
-
-    if (!res.ok) {
-      return left(await res.text());
-    }
-
-    try {
-      const val = await (res.headers.get("Content-Type") === "application/json"
-        ? res.json()
-        : res.text());
-      return mapLeft<t.ValidationError[], string>(validationErrorsToString)(
-        validator.decode(val)
-      );
-    } catch (err) {
-      return left((err as Error).toString());
-    }
-  }
-
   // user functions
 
   login(
