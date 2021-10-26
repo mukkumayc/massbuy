@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import CourseCard from "../../components/CourseCard";
 import Config from "../../config";
 import Pagination from "../../components/Pagination";
@@ -14,7 +14,7 @@ const CoursesList = ({ courses }: CoursesProps) => {
     new URLSearchParams(window.location.search).get("page") || "1"
   );
   return (
-    <Container className="courses">
+    <div className="courses">
       <Row className="justify-content-center">
         <Pagination
           pagesNum={Math.ceil(courses?.length / Config.coursesOnOnePage)}
@@ -27,10 +27,12 @@ const CoursesList = ({ courses }: CoursesProps) => {
             Config.coursesOnOnePage * page
           )
           .map((val, ind) => (
-            <CourseCard key={ind} course={val} />
+            <Col md="auto" key={ind}>
+              <CourseCard course={val} />
+            </Col>
           ))}
       </Row>
-    </Container>
+    </div>
   );
 };
 

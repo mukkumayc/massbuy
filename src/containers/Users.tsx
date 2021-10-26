@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Container, Table } from "react-bootstrap";
 import requestsWrapper from "../requestsWrapper";
 import { IUser } from "../types";
-
+import { fold } from "fp-ts/lib/Either";
 // interface UsersProps {}
 
 export default function Users() {
   const [users, setUsers] = useState<IUser[] | null>(null);
 
   useEffect(() => {
-    requestsWrapper
-      .get("/api/users/all")
-      .then((res) => setUsers(res))
-      .catch((err) => console.error(err));
+    requestsWrapper.users().then(fold(console.error, setUsers));
   }, [setUsers]);
   return (
     <Container id="users" className="page">

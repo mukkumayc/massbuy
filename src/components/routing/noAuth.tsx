@@ -14,11 +14,7 @@ const noAuth =
 
     useEffect(() => {
       setCheckingAuth(true);
-      if (pageProps.authenticated) {
-        router.push("/");
-      } else {
-        setCheckingAuth(false);
-      }
+      pageProps.authenticated ? router.push("/") : setCheckingAuth(false);
     }, [pageProps.authenticated]);
 
     return !checkingAuth ? <C {...pageProps} {...rest} /> : <></>;

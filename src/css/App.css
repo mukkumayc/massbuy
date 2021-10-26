@@ -1,5 +1,5 @@
 .price {
-  font-size: large;
+  /* font-size: large; */
   font-weight: bold;
 }
 
@@ -20,4 +20,8 @@
 .main-card {
   width: 100%;
   max-width: 576px;
+}
+
+.bi-trash {
+  vertical-align: -.125em;
 }

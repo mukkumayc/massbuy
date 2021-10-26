@@ -9,20 +9,23 @@ const CourseCard = ({
 }: {
   course: ICourse;
 }) => {
+  const platform = getPlatform(course_link);
   return (
-    <Card border="primary" className="course-card" key={course_id}>
-      <Link href={`/courses/${course_id}`}>
+    <Link href={`/courses/${course_id}`}>
+      <Card className="course-card" key={course_id}>
+        <Card.Img variant="top" src={picture_link} alt="" />
         <Card.Body>
           <Card.Title>
+            {platform && (
+              <Badge pill bg="secondary" className="float-end">
+                {platform}
+              </Badge>
+            )}
             {name}
-            <Badge pill bg="secondary">
-              {getPlatform(course_link)}
-            </Badge>
           </Card.Title>
-          <Card.Img variant="bottom" src={picture_link} alt="noimage" />
         </Card.Body>
-      </Link>
-    </Card>
+      </Card>
+    </Link>
   );
 };
 

@@ -2,24 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Form as BForm } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import requestsWrapper from "../../requestsWrapper";
-import { IUser } from "../../types";
+import { ICourse } from "../../types";
 import { useDispatch } from "react-redux";
 import { show } from "../../slices/messageModalSlice";
 import { useRouter } from "next/router";
+import { fold } from "fp-ts/lib/Either";
 
 interface CourseUpdateProps {}
 
-function CourseUpdate(props: CourseUpdateProps) {
+function CourseUpdate(_props: CourseUpdateProps) {
   const router = useRouter();
-  const [course, setCourse] = useState<IUser | null>(null);
+  const [course, setCourse] = useState<ICourse | null>(null);
   const [deleting, setDeleting] = useState(false);
-  const { courseId } = router.query;
+  const { courseId: _courseId } = router.query;
+  const courseId = _courseId instanceof Array ? _courseId[0] : _courseId || "";
   const dispatch = useDispatch();
   useEffect(() => {
-    requestsWrapper
-      .get(`/api/courses/${courseId}`)
-      .then((u) => setCourse(u))
-      .catch((err) => console.error(err));
+    requestsWrapper.course(courseId).then(fold(console.error, setCourse));
   }, [courseId]);
   return (
     <Container id="update" className="page d-flex justify-content-center">
@@ -34,17 +33,18 @@ function CourseUpdate(props: CourseUpdateProps) {
               onSubmit={(course, { setSubmitting }) => {
                 setSubmitting(true);
                 requestsWrapper
-                  .post(`/api/courses/update/${courseId}`, course)
-                  .then(() =>
-                    dispatch(
-                      show({
-                        header: "Success",
-                        message: "Course successfully updated",
-                      })
+                  .updateCourse(courseId, course)
+                  .then(
+                    fold(
+                      (message) => dispatch(show({ header: "Error", message })),
+                      () =>
+                        dispatch(
+                          show({
+                            header: "Success",
+                            message: "Course successfully updated",
+                          })
+                        )
                     )
-                  )
-                  .catch((err: Error) =>
-                    dispatch(show({ header: err.name, message: err.message }))
                   )
                   .finally(() => setSubmitting(false));
               }}
@@ -110,13 +110,13 @@ function CourseUpdate(props: CourseUpdateProps) {
                       disabled={isSubmitting || deleting}
                       onClick={() => {
                         setDeleting(true);
-                        requestsWrapper
-                          .post(`/api/courses/delete/${courseId}`, values)
-                          .then(() => {
-                            alert("Deleted");
+                        requestsWrapper.deleteCourse(courseId, values).then(
+                          fold(console.error, () => {
+                            console.log("Deleted");
                             setDeleting(false);
                             router.push("/courses/all");
-                          });
+                          })
+                        );
                       }}
                     >
                       Delete

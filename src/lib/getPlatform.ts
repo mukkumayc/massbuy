@@ -1,9 +1,9 @@
 const platforms: Record<string, string> = {
-  "openedu.ru": "openedu",
-  "www.coursera.com": "coursera",
+  "openedu.ru": "OPENEDU",
+  "www.coursera.com": "COURSERA",
 };
 
-const getPlatform = (courseLink: string) => {
+const getPlatform = (courseLink: string): string | null => {
   let url;
   try {
     url = new URL(courseLink);
@@ -13,10 +13,10 @@ const getPlatform = (courseLink: string) => {
       console.error("Cannot get platform", courseLink);
     }
   } catch (err) {
-    return "unknown";
+    return null;
   }
   console.log(url.hostname);
-  return "unknown";
+  return null;
 };
 
 export default getPlatform;

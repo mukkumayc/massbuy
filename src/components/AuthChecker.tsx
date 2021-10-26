@@ -1,3 +1,4 @@
+import { fold } from "fp-ts/lib/Either";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import requestsWrapper from "../requestsWrapper";
@@ -33,15 +34,15 @@ const AuthChecker = ({ children }: AuthCheckerProps) => {
       return;
     }
     requestsWrapper
-      .post(`/api/users/is_auth`)
-      .then(() => {
-        setAuthenticated(true);
-        return requestsWrapper
-          .get(`/api/users/all`)
-          .then(() => setIsAdmin(true))
-          .catch(() => setIsAdmin(false));
-      })
-      .catch(() => {})
+      .isAuth()
+      .then(fold(console.error, () => setAuthenticated(true)))
+      .then(requestsWrapper.users)
+      .then(
+        fold(
+          () => setIsAdmin(false),
+          () => setIsAdmin(true)
+        )
+      )
       .finally(() => setAuthenticating(false));
   }, [userId]);
 

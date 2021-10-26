@@ -1,10 +1,8 @@
 import React from "react";
 import Pagination from "react-bootstrap/Pagination";
-import { useRouter } from "next/router";
 import Link from "next/link";
 
 const createItems = (pagesNum: number) => {
-  const router = useRouter();
   const locationSearch = new URLSearchParams(window.location.search);
   let publicUrlPathname = "";
   try {

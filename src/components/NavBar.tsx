@@ -4,6 +4,7 @@ import { RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
 import { remove as removeUserId } from "../slices/userIdSlice";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 interface NavBarProps {
   authenticated: boolean;
@@ -11,50 +12,44 @@ interface NavBarProps {
   isAdmin: boolean;
 }
 
-// const a = (term: string) =>
-// new Promise((r) => {
-//   props.history.push(`/search?term=${term}`);
-//   r();
-// })
-
 const NavBar = (props: NavBarProps) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const userId = useSelector((state: RootState) => state.userId.value);
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="sm">
       <Container>
-        <Navbar.Brand onClick={() => router.push("/courses/all")}>
-          Massbuy
-        </Navbar.Brand>
+        <Link href="/courses/all" passHref>
+          <Navbar.Brand>Massbuy</Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav">
           <Nav className="mr-auto" variant="tabs">
             {props.authenticated ? (
               <>
-                <Nav.Link onClick={() => router.push("/cart")}>Cart</Nav.Link>
+                <Link href="/cart" passHref>
+                  <Nav.Link>Cart</Nav.Link>
+                </Link>
                 {props.isAdmin && (
-                  <Nav.Link onClick={() => router.push("/users/all")}>
-                    All users
-                  </Nav.Link>
+                  <Link href="/users/all" passHref>
+                    <Nav.Link>All users</Nav.Link>
+                  </Link>
                 )}
                 <NavDropdown title="Courses" id="courses-nav-dropdown">
-                  <NavDropdown.Item onClick={() => router.push("/courses/all")}>
-                    List all
-                  </NavDropdown.Item>
+                  <Link href="/courses/all" passHref>
+                    <NavDropdown.Item>List all</NavDropdown.Item>
+                  </Link>
                   {props.isAdmin && (
-                    <NavDropdown.Item
-                      onClick={() => router.push("/courses/create")}
-                    >
-                      Create
-                    </NavDropdown.Item>
+                    <Link href="/courses/create" passHref>
+                      <NavDropdown.Item>Create</NavDropdown.Item>
+                    </Link>
                   )}
                   {userId === null ? (
                     "Loading..."
                   ) : (
-                    <NavDropdown.Item to={`/courses/user_courses/${userId}`}>
-                      My courses
-                    </NavDropdown.Item>
+                    <Link href={`/courses/user_courses/${userId}`} passHref>
+                      <NavDropdown.Item>My courses</NavDropdown.Item>
+                    </Link>
                   )}
                 </NavDropdown>
                 <Nav.Link

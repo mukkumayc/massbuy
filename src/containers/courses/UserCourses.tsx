@@ -4,6 +4,7 @@ import requestsWrapper from "../../requestsWrapper";
 import { ICourse } from "../../types";
 import CoursesList from "./CoursesList";
 import { useRouter } from "next/router";
+import { fold } from "fp-ts/lib/Either";
 
 function UserCourses() {
   const router = useRouter();
@@ -13,9 +14,8 @@ function UserCourses() {
 
   useEffect(() => {
     requestsWrapper
-      .get(`/api/courses/user_courses/${userId}`)
-      .then((cs) => setCourses(cs))
-      .catch((err) => console.error(err))
+      .userCourses(userId instanceof Array ? userId[0] : userId || "")
+      .then(fold(console.error, setCourses))
       .finally(() => setLoading(false));
   }, [userId]);
   return (

@@ -6,6 +6,7 @@ import { ICourse } from "../types";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import requestsWrapper from "../requestsWrapper";
+import { fold } from "fp-ts/lib/Either";
 
 interface Cart {
   courses: ICourse[];
@@ -23,18 +24,16 @@ const Cart = () => {
   const fetchCourses = useCallback(() => {
     setFetching(true);
     requestsWrapper
-      .get(`/api/baskets/${userId}`)
-      .then((c) => setCart(c))
-      .catch(console.log)
+      .basket(userId)
+      .then(fold(console.error, setCart))
       .finally(() => setFetching(false));
   }, [userId]);
 
   const deleteCourse = useCallback(
     (courseId: number) => {
       requestsWrapper
-        .post(`/api/baskets/delete_course_from_basket/${userId}/${courseId}`)
-        .then(fetchCourses)
-        .catch(console.error);
+        .deleteCourseFromBasket(userId, courseId)
+        .then(fold(console.error, fetchCourses));
     },
     [userId, fetchCourses]
   );
@@ -45,11 +44,11 @@ const Cart = () => {
       {fetching ? (
         "Loading..."
       ) : cart ? (
-        <Row>
-          <Col sm="8">
+        <Row className="justify-content-center">
+          <Col md="6">
             <CartList courses={cart.courses} {...{ deleteCourse }} />
           </Col>
-          <Col sm="4">
+          <Col md="3">
             <PayCard totalPrice={cart.total_price} />
           </Col>
         </Row>

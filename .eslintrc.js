@@ -31,5 +31,6 @@ module.exports = {
         argsIgnorePattern: "^_",
       },
     ],
+    "react/display-name": "off",
   },
 };

@@ -28,7 +28,7 @@ const SearchBar = ({ search }: SearchBarProps) => {
       }}
     >
       {({ handleChange, isSubmitting, values }) => (
-        <Form as={FForm} inline className="search-bar">
+        <Form as={FForm} className="search-bar">
           <div
             className="d-flex search-wrapper"
             style={{

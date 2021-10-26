@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import CoursesList from "./CoursesList";
 import Container from "react-bootstrap/Container";
-import fetchCourses from "../../lib/fetchCourses";
 import { ICourse } from "../../types";
+import requestsWrapper from "../../requestsWrapper";
+import { fold } from "fp-ts/lib/Either";
 
 interface CoursesProps {
   courses: ICourse[];
@@ -13,13 +14,14 @@ const Courses = ({ courses, setCourses }: CoursesProps) => {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCourses()
-      .then((res) => {
-        setCourses(res);
-      })
-      .catch((e) => {
-        console.error(e);
-      })
+    requestsWrapper
+      .courses()
+      .then(
+        fold((err) => {
+          console.error(err);
+          setCourses([]);
+        }, setCourses)
+      )
       .then(() => setLoading(false));
   }, [setCourses]);
 

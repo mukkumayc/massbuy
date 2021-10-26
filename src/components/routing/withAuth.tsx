@@ -8,20 +8,16 @@ interface AuthProps {
 
 const withAuth =
   (C: (_props: any) => JSX.Element) =>
-  ({ pageProps, ...rest }: AuthProps) => {
+  ({ pageProps }: AuthProps) => {
     const router = useRouter();
     const [checkingAuth, setCheckingAuth] = useState(true);
 
     useEffect(() => {
       setCheckingAuth(true);
-      if (!pageProps.authenticated) {
-        router.push("/login");
-      } else {
-        setCheckingAuth(false);
-      }
+      !pageProps.authenticated ? router.push("/login") : setCheckingAuth(false);
     }, [pageProps.authenticated]);
 
-    return !checkingAuth ? <C {...pageProps} {...rest} /> : <></>;
+    return !checkingAuth ? <C {...pageProps} /> : <></>;
   };
 
 export default withAuth;

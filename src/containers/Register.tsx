@@ -5,6 +5,7 @@ import { Container, Row, Col, Form as BForm } from "react-bootstrap";
 import requestsWrapper from "../requestsWrapper";
 import { set as setUserId } from "../slices/userIdSlice";
 import { useDispatch } from "react-redux";
+import { map, mapLeft, fold } from "fp-ts/lib/Either";
 
 interface RegisterProps {
   setAuthenticated(_b: boolean): void;
@@ -15,7 +16,7 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState<string>("");
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: {
       email: string;
       name: string;
@@ -26,22 +27,25 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
     setSubmitting: (_b: boolean) => void
   ) => {
     const { email, password } = values;
-    requestsWrapper
-      .post("/api/users/register/user", values)
-      .then(() => {
-        requestsWrapper
-          .post("/api/users/login", { email, password })
-          .then((res) => {
-            dispatch(setUserId(res.id));
-            setAuthenticated(true);
-            return requestsWrapper
-              .get(`/api/users/all`)
-              .then(() => setIsAdmin(true))
-              .catch(() => setIsAdmin(false));
-          });
-      })
-      .catch((err) => setErrorMsg(err.toString()))
-      .finally(() => setSubmitting(false));
+    const res = await requestsWrapper.register(values);
+    mapLeft(setErrorMsg)(res);
+    if (res._tag === "Left") return;
+
+    const res1 = await requestsWrapper.login(email, password);
+
+    mapLeft(setErrorMsg)(res1);
+    if (res1._tag === "Left") return;
+
+    map(({ id }: { id: number }) => dispatch(setUserId(id)))(res1);
+    setAuthenticated(true);
+    await requestsWrapper.users().then(
+      fold(
+        () => setIsAdmin(false),
+        () => setIsAdmin(true)
+      )
+    );
+
+    setSubmitting(false);
   };
 
   return (

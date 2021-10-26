@@ -1,3 +1,4 @@
+import { foldW } from "fp-ts/lib/Either";
 import React, { useState } from "react";
 import { Card, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,28 +22,16 @@ const PayCard = ({ totalPrice }: BuyCardProps) => {
           <Button
             type="submit"
             onClick={() => {
-              requestsWrapper
-                .post(`/api/orders/payment/${userId}`)
-                .then((formText) => {
-                  setPayForm(formText);
-                  // @ts-ignore
-                  document.getElementById("gateway_middle_form")!.submit();
-                  // const form = new DOMParser().parseFromString(formText, "text/html");
-                  // // why emoji?
-                  // const emoji = form.querySelector("#gateway_middle_form input[name='emoji']")?.getAttribute("value");
-                  // const formData = new FormData();
-                  // if (!emoji) {
-                  //   throw new Error("Emoji value not found");
-                  // }
-                  // formData.append("emoji", emoji);
-                  // return fetch("https://paydev.spbu.ru/gateway/index.php", {
-                  //   method: "post",
-
-                  // })
-                })
-                .catch((err) =>
-                  dispatch(show({ header: "Error", message: err.message }))
-                );
+              requestsWrapper.payment(userId).then(
+                foldW(
+                  (message) => dispatch(show({ header: "Error", message })),
+                  (formText) => {
+                    setPayForm(formText);
+                    // @ts-ignore
+                    document.getElementById("gateway_middle_form")!.submit();
+                  }
+                )
+              );
             }}
           >
             Pay

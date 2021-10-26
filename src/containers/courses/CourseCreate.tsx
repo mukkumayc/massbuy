@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Card, Container, Form as BForm } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import requestsWrapper from "../../requestsWrapper";
+import { fold } from "fp-ts/lib/Either";
 
 function CourseCreate() {
   return (
@@ -23,9 +24,13 @@ function CourseCreate() {
             onSubmit={(course, { setSubmitting }) => {
               setSubmitting(true);
               requestsWrapper
-                .post("/api/courses/create", course)
-                .then((json) => alert(JSON.stringify(json, null, 2)))
-                .catch((err) => alert(err.toString()))
+                .createCourse(course)
+                .then(
+                  fold(
+                    (err) => alert(err),
+                    (json) => alert(JSON.stringify(json, null, 2))
+                  )
+                )
                 .finally(() => setSubmitting(false));
             }}
           >

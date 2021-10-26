@@ -5,6 +5,7 @@ import { Container, Row, Col, Form as BForm } from "react-bootstrap";
 import requestsWrapper from "../requestsWrapper";
 import { set as setUserId } from "../slices/userIdSlice";
 import { useDispatch } from "react-redux";
+import { fold, mapLeft } from "fp-ts/lib/Either";
 
 interface LoginProps {
   setAuthenticated(_b: boolean): void;
@@ -15,22 +16,27 @@ const Login = ({ setAuthenticated, setIsAdmin }: LoginProps) => {
   const dispatch = useDispatch();
   const [errorMsg, setErrorMsg] = useState<string>("");
 
-  const handleSubmit = (
+  const handleSubmit = async (
     { email, password }: { email: string; password: string },
     setSubmitting: (_b: boolean) => void
   ) => {
-    requestsWrapper
-      .post("/api/users/login", { email, password })
-      .then((res) => {
-        dispatch(setUserId(res.id));
-        setAuthenticated(true);
-        requestsWrapper
-          .get(`/api/users/all`)
-          .then(() => setIsAdmin(true))
-          .catch(() => setIsAdmin(false));
-      })
-      .catch((err) => setErrorMsg(err.toString()))
-      .finally(() => setSubmitting(false));
+    const res = await requestsWrapper.login(email, password);
+    mapLeft(setErrorMsg)(res);
+    if (res._tag === "Left") {
+      setSubmitting(false);
+      return;
+    }
+
+    dispatch(setUserId(res.right.id));
+
+    await requestsWrapper.users().then(
+      fold(
+        () => setIsAdmin(false),
+        () => setIsAdmin(true)
+      )
+    );
+
+    setAuthenticated(true);
   };
 
   return (

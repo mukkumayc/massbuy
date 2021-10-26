@@ -1,17 +1,24 @@
 .card.course-card {
-  width: 300px;
-  margin: 0.2em;
-  height: auto;
+  width: 250px;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 }
 
-.card.course-card .card-img-bottom {
-  object-fit: contain;
+.card.course-card .card-img-top {
+  margin: auto;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-color: #cce7e8;
+  color: rgba(0, 0, 0, 0);
 }
 
-@media (max-width: 576px) {
+.card.course-card {
+  margin-bottom: 1em;
+  width: 100%;
+}
+@media (min-width: 768px) {
   .card.course-card {
-    width: 100%;
+    width: 250px;
   }
 }
 
