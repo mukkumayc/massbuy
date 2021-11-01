@@ -26,7 +26,11 @@ async function _fetch<A>(
           headers: { "Content-Type": "application/json" },
         }
       : {}),
-  });
+  }).catch((err: Error) => err.toString());
+
+  if (typeof res === "string") {
+    return left(res);
+  }
 
   if (!res.ok) {
     return left(await res.text());
@@ -64,7 +68,7 @@ class RequestsWrapper {
   }
 
   register(
-    user: Omit<IUser, "id" | "profile">
+    user: Omit<IUser, "id" | "profile"> & { password: string }
   ): Promise<Either<string, IUser>> {
     return _fetch(`${serverUrl}/api/users/register/user`, "post", UserC, user);
   }
