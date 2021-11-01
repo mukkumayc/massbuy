@@ -29,10 +29,9 @@ export const UserC = t.type({
   name: t.string,
   surname: t.string,
   patronymic: t.string,
-  password: t.string,
   profile: t.type({
-    coursera_email: t.string,
-    openedu_email: t.string,
+    coursera_email: t.union([t.string, t.null]),
+    openedu_email: t.union([t.string, t.null]),
   }),
 });
 
