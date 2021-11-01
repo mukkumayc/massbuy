@@ -3,8 +3,10 @@ import { Button, Card, Container, Form as BForm } from "react-bootstrap";
 import { Formik, Form, Field } from "formik";
 import requestsWrapper from "../../requestsWrapper";
 import { fold } from "fp-ts/lib/Either";
+import { useRouter } from "next/router";
 
 function CourseCreate() {
+  const router = useRouter();
   return (
     <Container id="create" className="page d-flex justify-content-center">
       <Card id="create-card" className="main-card">
@@ -28,7 +30,10 @@ function CourseCreate() {
                 .then(
                   fold(
                     (err) => alert(err),
-                    (json) => alert(JSON.stringify(json, null, 2))
+                    (json) => {
+                      alert(JSON.stringify(json, null, 2));
+                      router.push("/");
+                    }
                   )
                 )
                 .finally(() => setSubmitting(false));
