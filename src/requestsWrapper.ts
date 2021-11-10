@@ -185,12 +185,8 @@ class RequestsWrapper {
     );
   }
 
-  checkPayment(userId: number, orderId: number) {
-    return _fetch(
-      `${serverUrl}/api/orders/check/${userId}/${orderId}`,
-      "post",
-      t.unknown
-    );
+  checkPayment(token: string) {
+    return _fetch(`${serverUrl}/api/orders/check/${token}`, "post", t.unknown);
   }
 }
 
