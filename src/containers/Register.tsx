@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Container, Row, Col, Form as BForm } from "react-bootstrap";
+import { Container, Row, Col, Form as BForm, Card } from "react-bootstrap";
 import requestsWrapper from "../requestsWrapper";
 import { set as setUserId } from "../slices/userIdSlice";
 import { useDispatch } from "react-redux";
@@ -27,7 +27,11 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
     setSubmitting: (_b: boolean) => void
   ) => {
     const { email, password } = values;
-    const res = await requestsWrapper.register(values);
+    const res = await requestsWrapper.register({
+      ...values,
+      profile: { coursera_email: null, openedu_email: null },
+    });
+
     mapLeft(setErrorMsg)(res);
     if (res._tag === "Left") return;
 
@@ -71,67 +75,76 @@ const Register = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
             }
           >
             {({ isSubmitting, handleChange }) => (
-              <Form>
-                <BForm.Group className="mb-3">
-                  <BForm.Label htmlFor="register-email">Email</BForm.Label>
-                  <BForm.Control
-                    type="email"
-                    name="email"
-                    id="register-email"
-                    onChange={handleChange}
-                  />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                  <BForm.Label htmlFor="register-name">Name</BForm.Label>
-                  <BForm.Control
-                    type="text"
-                    name="name"
-                    id="register-name"
-                    onChange={handleChange}
-                  />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                  <BForm.Label htmlFor="register-surname">Surname</BForm.Label>
-                  <BForm.Control
-                    type="text"
-                    name="surname"
-                    id="register-surname"
-                    onChange={handleChange}
-                  />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                  <BForm.Label htmlFor="register-patronymic">
-                    Patronymic
-                  </BForm.Label>
-                  <BForm.Control
-                    type="text"
-                    name="patronymic"
-                    id="register-patronymic"
-                    onChange={handleChange}
-                  />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                  <BForm.Label htmlFor="register-password">
-                    Password
-                  </BForm.Label>
-                  <BForm.Control
-                    type="password"
-                    name="password"
-                    id="register-password"
-                    onChange={handleChange}
-                  />
-                </BForm.Group>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={isSubmitting}
-                >
-                  Sign in
-                </button>
-                {errorMsg ? (
-                  <div className="alert alert-danger m-3">{errorMsg}</div>
-                ) : null}
-              </Form>
+              <Card>
+                <Card.Header>
+                  <h4>Register</h4>
+                </Card.Header>
+                <Card.Body>
+                  <Form>
+                    <BForm.Group className="mb-3">
+                      <BForm.Label htmlFor="register-email">Email</BForm.Label>
+                      <BForm.Control
+                        type="email"
+                        name="email"
+                        id="register-email"
+                        onChange={handleChange}
+                      />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                      <BForm.Label htmlFor="register-name">Name</BForm.Label>
+                      <BForm.Control
+                        type="text"
+                        name="name"
+                        id="register-name"
+                        onChange={handleChange}
+                      />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                      <BForm.Label htmlFor="register-surname">
+                        Surname
+                      </BForm.Label>
+                      <BForm.Control
+                        type="text"
+                        name="surname"
+                        id="register-surname"
+                        onChange={handleChange}
+                      />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                      <BForm.Label htmlFor="register-patronymic">
+                        Patronymic
+                      </BForm.Label>
+                      <BForm.Control
+                        type="text"
+                        name="patronymic"
+                        id="register-patronymic"
+                        onChange={handleChange}
+                      />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                      <BForm.Label htmlFor="register-password">
+                        Password
+                      </BForm.Label>
+                      <BForm.Control
+                        type="password"
+                        name="password"
+                        id="register-password"
+                        onChange={handleChange}
+                      />
+                    </BForm.Group>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isSubmitting}
+                    >
+                      Sign in
+                    </button>
+                    {errorMsg ? (
+                      <div className="alert alert-danger m-3">{errorMsg}</div>
+                    ) : null}
+                  </Form>
+                </Card.Body>
+              </Card>
             )}
           </Formik>
         </Col>

@@ -68,7 +68,7 @@ class RequestsWrapper {
   }
 
   register(
-    user: Omit<IUser, "id" | "profile"> & { password: string }
+    user: Omit<IUser, "id"> & { password: string }
   ): Promise<Either<string, IUser>> {
     return _fetch(`${serverUrl}/api/users/register/user`, "post", UserC, user);
   }
@@ -163,7 +163,7 @@ class RequestsWrapper {
     courseId: number
   ): Promise<Either<string, unknown>> {
     return _fetch(
-      `${serverUrl}/api/baskets/delete_course_to_basket/${userId}/${courseId}`,
+      `${serverUrl}/api/baskets/delete_course_from_basket/${userId}/${courseId}`,
       "post",
       t.unknown
     );

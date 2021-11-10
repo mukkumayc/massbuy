@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { Container, Row, Col, Form as BForm } from "react-bootstrap";
+import { Container, Row, Col, Form as BForm, Card } from "react-bootstrap";
 import requestsWrapper from "../requestsWrapper";
 import { set as setUserId } from "../slices/userIdSlice";
 import { useDispatch } from "react-redux";
@@ -67,38 +67,45 @@ const RegisterStudent = ({ setAuthenticated, setIsAdmin }: RegisterProps) => {
             }
           >
             {({ isSubmitting, handleChange }) => (
-              <Form>
-                <BForm.Group className="mb-3">
-                  <BForm.Label htmlFor="register-email">Email</BForm.Label>
-                  <BForm.Control
-                    type="email"
-                    name="email"
-                    id="register-email"
-                    onChange={handleChange}
-                  />
-                </BForm.Group>
-                <BForm.Group className="mb-3">
-                  <BForm.Label htmlFor="register-password">
-                    Password
-                  </BForm.Label>
-                  <BForm.Control
-                    type="password"
-                    name="password"
-                    id="register-password"
-                    onChange={handleChange}
-                  />
-                </BForm.Group>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={isSubmitting}
-                >
-                  Sign in
-                </button>
-                {errorMsg ? (
-                  <div className="alert alert-danger m-3">{errorMsg}</div>
-                ) : null}
-              </Form>
+              <Card>
+                <Card.Header>
+                  <h4>Register as student</h4>
+                </Card.Header>
+                <Card.Body>
+                  <Form>
+                    <BForm.Group className="mb-3">
+                      <BForm.Label htmlFor="register-email">Email</BForm.Label>
+                      <BForm.Control
+                        type="email"
+                        name="email"
+                        id="register-email"
+                        onChange={handleChange}
+                      />
+                    </BForm.Group>
+                    <BForm.Group className="mb-3">
+                      <BForm.Label htmlFor="register-password">
+                        Password
+                      </BForm.Label>
+                      <BForm.Control
+                        type="password"
+                        name="password"
+                        id="register-password"
+                        onChange={handleChange}
+                      />
+                    </BForm.Group>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      disabled={isSubmitting}
+                    >
+                      Sign in
+                    </button>
+                    {errorMsg ? (
+                      <div className="alert alert-danger m-3">{errorMsg}</div>
+                    ) : null}
+                  </Form>
+                </Card.Body>
+              </Card>
             )}
           </Formik>
         </Col>

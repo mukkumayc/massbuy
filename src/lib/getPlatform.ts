@@ -1,21 +1,23 @@
-const platforms: Record<string, string> = {
-  "openedu.ru": "OPENEDU",
-  "www.coursera.com": "COURSERA",
-};
+const platforms: [string, string][] = [
+  ["openedu.ru", "OPENEDU"],
+  ["coursera.org", "COURSERA"],
+];
 
 const getPlatform = (courseLink: string): string | null => {
-  let url;
+  let url: URL;
   try {
     url = new URL(courseLink);
-    if (platforms[url.hostname]) {
-      return platforms[url.hostname];
-    } else {
-      console.error("Cannot get platform", courseLink);
-    }
   } catch (err) {
     return null;
   }
-  console.log(url.hostname);
+
+  const platform = platforms.find((p) => url.hostname.endsWith(p[0]));
+  if (platform) {
+    return platform[1];
+  } else {
+    console.warn("Cannot get platform", courseLink);
+  }
+
   return null;
 };
 
