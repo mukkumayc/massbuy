@@ -6,7 +6,7 @@ const Success = () => (
   <Container className="page">
     <Row className="justify-content-center">
       <Col md="auto">
-        <h1 className="text-danger">Failure!</h1>
+        <h1 className="text-danger">Failure</h1>
       </Col>
     </Row>
   </Container>
