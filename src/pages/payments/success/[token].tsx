@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import withAuth from "../../components/routing/withAuth";
+import withAuth from "../../../components/routing/withAuth";
 import { useRouter } from "next/router";
-import requestsWrapper from "../../requestsWrapper";
+import requestsWrapper from "../../../requestsWrapper";
 import { fold } from "fp-ts/lib/Either";
 
 const Success = () => {
