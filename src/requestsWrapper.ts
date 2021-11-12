@@ -1,6 +1,6 @@
 import { Either, left, mapLeft, right } from "fp-ts/lib/Either";
 import * as t from "io-ts";
-import { CourseC, ICourse, IUser, UserC } from "./types";
+import { CourseC, ICourse, IUser, RequestError, UserC } from "./types";
 import { validationErrorsToString } from "./utils";
 
 if (process.env.NEXT_PUBLIC_SERVER_URL === undefined) {
@@ -16,7 +16,7 @@ async function _fetch<A>(
   method: "get" | "post",
   validator: t.Decoder<unknown, A>,
   body?: any
-): Promise<Either<string, A>> {
+): Promise<Either<RequestError, A>> {
   const res = await fetch(url, {
     method,
     credentials: "include",
@@ -32,7 +32,16 @@ async function _fetch<A>(
     return left(res);
   }
 
+  console.log(new URL(res.url).pathname);
+
   if (!res.ok) {
+    // if unauthorized, redirect to login page
+    if (
+      res.status == 401 &&
+      new URL(res.url).pathname !== "/api/users/is_auth"
+    ) {
+      window.location.replace(`/login`);
+    }
     return left(await res.text());
   }
 
@@ -44,21 +53,22 @@ async function _fetch<A>(
     const val = await (res.headers.get("Content-Type") === "application/json"
       ? res.json()
       : res.text());
-    return mapLeft<t.ValidationError[], string>(validationErrorsToString)(
+    return mapLeft<t.ValidationError[], RequestError>(validationErrorsToString)(
       validator.decode(val)
     );
   } catch (err) {
-    return left((err as Error).toString());
+    if (err instanceof Error) {
+      return left((err as Error).toString());
+    } else {
+      return left("Unknown error");
+    }
   }
 }
 
 class RequestsWrapper {
   // user functions
 
-  login(
-    email: string,
-    password: string
-  ): Promise<Either<string, { id: number }>> {
+  login(email: string, password: string) {
     return _fetch(
       `${serverUrl}/api/users/login`,
       "post",
@@ -69,41 +79,40 @@ class RequestsWrapper {
 
   register(
     user: Omit<IUser, "id"> & { password: string }
-  ): Promise<Either<string, IUser>> {
+  ): Promise<Either<RequestError, IUser>> {
     return _fetch(`${serverUrl}/api/users/register/user`, "post", UserC, user);
   }
 
   registerStudent(
     email: string,
     password: string
-  ): Promise<Either<string, IUser>> {
+  ): Promise<Either<RequestError, IUser>> {
     return _fetch(`${serverUrl}/api/users/register/student`, "post", UserC, {
       email,
       password,
     });
   }
 
-  async isAuth(): Promise<Either<string, unknown>> {
+  async isAuth() {
     const res = await _fetch(
       `${serverUrl}/api/users/is_auth`,
       "post",
       t.unknown
     );
-    console.log(res);
     return res;
   }
 
-  async users(): Promise<Either<string, IUser[]>> {
+  async users(): Promise<Either<RequestError, IUser[]>> {
     return _fetch(`${serverUrl}/api/users/all`, "get", t.array(UserC));
   }
 
   // course functions
 
-  courses(): Promise<Either<string, ICourse[]>> {
+  courses(): Promise<Either<RequestError, ICourse[]>> {
     return _fetch(`${serverUrl}/api/courses/all`, "get", t.array(CourseC));
   }
 
-  course(id: number | string): Promise<Either<string, ICourse>> {
+  course(id: number | string): Promise<Either<RequestError, ICourse>> {
     return _fetch(`${serverUrl}/api/courses/${id}`, "get", CourseC);
   }
 
@@ -129,7 +138,9 @@ class RequestsWrapper {
     );
   }
 
-  userCourses(userId: number | string): Promise<Either<string, ICourse[]>> {
+  userCourses(
+    userId: number | string
+  ): Promise<Either<RequestError, ICourse[]>> {
     return _fetch(
       `${serverUrl}/api/courses/user_courses/${userId}`,
       "post",
@@ -139,7 +150,11 @@ class RequestsWrapper {
 
   // basket functions
 
-  basket(userId: number | string) {
+  basket(
+    userId: number | string
+  ): Promise<
+    Either<RequestError, { courses: ICourse[]; total_price: number }>
+  > {
     return _fetch(
       `${serverUrl}/api/baskets/${userId}`,
       "get",
@@ -147,10 +162,7 @@ class RequestsWrapper {
     );
   }
 
-  addCourseToBasket(
-    userId: number,
-    courseId: number
-  ): Promise<Either<string, unknown>> {
+  addCourseToBasket(userId: number, courseId: number) {
     return _fetch(
       `${serverUrl}/api/baskets/add_course_to_basket/${userId}/${courseId}`,
       "post",
@@ -158,10 +170,7 @@ class RequestsWrapper {
     );
   }
 
-  deleteCourseFromBasket(
-    userId: number,
-    courseId: number
-  ): Promise<Either<string, unknown>> {
+  deleteCourseFromBasket(userId: number, courseId: number) {
     return _fetch(
       `${serverUrl}/api/baskets/delete_course_from_basket/${userId}/${courseId}`,
       "post",
@@ -169,7 +178,7 @@ class RequestsWrapper {
     );
   }
 
-  deleteAllCoursesFromBasket(userId: number): Promise<Either<string, unknown>> {
+  deleteAllCoursesFromBasket(userId: number) {
     return _fetch(
       `${serverUrl}/api/baskets/delete_all_courses_to_basket/${userId}`,
       "post",

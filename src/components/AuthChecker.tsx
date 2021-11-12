@@ -29,21 +29,30 @@ const AuthChecker = ({ children }: AuthCheckerProps) => {
     (state: RootState) => state.messageModal.value
   );
   useEffect(() => {
-    if (Number.isNaN(userId)) {
-      setAuthenticating(false);
-      return;
-    }
-    requestsWrapper
-      .isAuth()
-      .then(fold(console.error, () => setAuthenticated(true)))
-      .then(requestsWrapper.users)
-      .then(
+    async function checkAuthentication() {
+      if (Number.isNaN(userId)) {
+        setAuthenticating(false);
+        return;
+      }
+
+      const isAuth = await requestsWrapper.isAuth();
+
+      if (isAuth._tag === "Left") {
+        setAuthenticated(false);
+        return setAuthenticating(false);
+      }
+
+      await requestsWrapper.users().then(
         fold(
           () => setIsAdmin(false),
           () => setIsAdmin(true)
         )
-      )
-      .finally(() => setAuthenticating(false));
+      );
+
+      setAuthenticating(false);
+    }
+
+    checkAuthentication();
   }, [userId]);
 
   return (

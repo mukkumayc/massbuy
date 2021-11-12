@@ -36,3 +36,5 @@ export const UserC = t.type({
 });
 
 export type IUser = t.TypeOf<typeof UserC>;
+
+export type RequestError = string;
